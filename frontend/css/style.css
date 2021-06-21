@@ -1,0 +1,252 @@
+html, body {
+    height: 100%;
+    font-size: 1rem;
+}
+
+.nav-image {
+    flex: 4;
+}
+
+.nav-liens {
+    display: flex;
+    background-color: green;
+}
+
+.lien-accueil {
+    color: rgba(9,9,121,1)!important;
+    margin: 5px;
+    padding: 10px 15px!important;
+    border-radius: 10px;
+    width: 150px;
+    text-align: center;
+}
+
+.lien-accueil:hover {
+    background: linear-gradient(45deg, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+    color: whitesmoke!important;
+    margin: 5px;
+    padding: 10px 10px;
+    border-radius: 10px;
+}
+
+.accueil {
+    color: black;
+}
+
+.img-panier {
+    width: 20px;
+    margin: 5px 10px;
+}
+
+.box-quantite {
+    position: relative;
+}
+
+.panier-quantite {
+    width: 28px;
+    cursor: pointer;    
+    display: block;
+}
+
+.chiffre-quantite {
+    background-color: mediumturquoise;
+    border-radius: 8px;
+    font-size: 12px;
+    width: 20px;
+    text-align: center;
+    font-weight: bold;
+    top: 0px;
+    right: 0px;
+    position: absolute;
+}
+
+h3 {
+    height: 100px;
+}
+
+.fixed-top {
+    box-shadow: 1px 1px 6px #555;
+}
+
+.gradient {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+}
+
+.page-header {
+    margin-top: 6.5rem;
+    font-size: 1rem;
+    font-family: 'Recursive', sans-serif;
+}
+
+.color-light {
+    color: whitesmoke;
+}
+
+main {
+    min-height: 150vh;
+}
+
+.main-meuble {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    margin: 100px auto;
+    height: 250px;
+}
+
+.gallery {
+    background-color: whitesmoke;
+}
+
+.card {
+    width: 50%;
+    background-color: whitesmoke;
+    color:rgb(24, 19, 114);
+}
+
+.card-title2 {
+    font-size: 2rem;
+    height: 80%;
+}
+
+.card-body--descriptif {
+    display:flex; 
+    flex-direction: column;
+}
+
+.descriptif {
+    display:flex; 
+    flex-direction: column;
+}
+
+.label-article {
+    padding: 20px 0; 
+    font-weight:bold; 
+    color: rgb(24, 19, 114);
+}
+
+.choix-dimension {
+    display:flex; 
+    flex-direction: column;
+}
+
+.btn-validation {
+    margin-top: 50px;
+}
+
+.presentation-produit {
+    width: 20%;
+}   
+
+.image-dimension {
+    width: 18%;
+    background-color: whitesmoke;
+}
+
+.caracteristique-dimension {
+    width: 50%;
+    background: linear-gradient(45deg, rgb(24, 19, 114) 35%, rgba(9,9,121,1) 100%);
+    color: whitesmoke;
+    padding: 50px 10px;
+}
+
+.choix-dimension {
+    width: 100%;
+    display: flex;
+    
+}
+
+.description {
+    padding: 50px 10px;
+}
+
+a {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.heightImg {
+    height: 230px;
+}
+
+.prix {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-gradient {
+    color: whitesmoke!important;
+    background-image: linear-gradient(rgb(102, 51, 0), rgb(153, 102, 0));
+}
+
+.btn-gradient:hover {
+    font-weight: 500;
+    background-image: linear-gradient(90deg,rgb(102, 51, 0), rgb(153, 102, 0));
+}
+
+.tableau {
+    border-collapse: collapse;
+    min-width: 400px;
+    width: auto;
+    cursor: pointer;
+    margin: 100px auto;
+    border: 1px solid gray;
+    box-shadow: 1px 1px 6px #555;
+}
+
+thead tr {
+    background-color: rgb(24, 19, 114);
+    color: whitesmoke;
+}
+
+th, td {
+    padding: 15px 20px;
+}
+
+tbody tr, td, th {
+    border: 1px solid lightgray;
+}  
+
+.right {
+    text-align: right;
+}
+
+.center {
+    text-align: center;
+}
+
+.red {
+    color: red;
+}
+
+tbody#tbody-total {
+    background-color: lightblue;
+}
+
+.gras {
+    font-weight: bold;
+}
+
+.panier-vide {
+    text-align: center;
+}
+
+footer {
+    color: whitesmoke;
+    margin: 0;
+    font-size: 1rem;
+    padding: 1rem;
+}
+
+@media (max-width: 800px) {
+    .img-first {
+        height: 200px;
+    }
+}
