@@ -1,34 +1,56 @@
     let infoLocalStorage = JSON.parse(localStorage.getItem('caracteristiques'));
     // console.log(infoLocalStorage[0]);ok
-    console.log(localStorage.key(0));
-    console.log(localStorage.key(0));
-    console.log(Object.entries(localStorage));
+    // console.log(localStorage.key(0));
+    // console.log(localStorage.key(0));
+    // console.log(Object.entries(localStorage));
     // let trucMuche = Object.entries(localStorage);
     // console.log(trucMuche.slice(0, 0));
 
-
-
-    let infoQuantiteTableau = parseInt(document.getElementById('info-quantite-tableau'));
+    let infoQuantiteTableau = parseInt(document.getElementById('info-quantite-tableau'));//pour panier vide
     let tbodyPanier = document.getElementById('tbody-panier');
     
     if(infoLocalStorage == null || infoLocalStorage == 0){
         infoQuantiteTableau.innerHTML = 'Votre panier est vide';
     } else {
     //partie HTML - visible sur le site avec la boucle for - informations et quantités repris du localstorage en cours
+    //SI PAS ENCORE ENREGISTRE DANS PANIER
+    //si id existant ajouté la quantite
     for(i=0; i<infoLocalStorage.length; i++){
         tbodyPanier.innerHTML += `
         <tr class="ligne-produit" id="${infoLocalStorage[i]._id}">
             <td class="donnees-tableau center">${infoLocalStorage[i].name}</td>
-            <td class="donnees-tableau center"><button>moins</button></td>
             <td class="donnees-tableau center"><input type="number" value="1" class="quantite-produit"></td>
-            <td class="donnees-tableau center"><button>plus</button></td>
             <td class="donnees-tableau prix-unique-produit right">${infoLocalStorage[i].price}</td>
             <td class="donnees-tableau right prix-total-produit"></td>
             <td><button class="donnees-tablea btn-supprimer">Supprimer</button><td>
         </tr>
         `;   
     };
+    //rajouter quantite +1
 };
+
+
+///ne pas afficher les memes données dans le tableau
+let tableau_id = infoLocalStorage;
+// console.log(tableau_id);
+let temp = tableau_id.reduce(
+    (acc, el) => {
+        return acc.add(el._id)
+    }, new Set()
+    );
+let tableau_sans_doublons = [...temp];
+console.log(tableau_sans_doublons); 
+console.log(infoLocalStorage[0]._id);
+
+console.log(infoLocalStorage[0]._id == tableau_sans_doublons);
+
+
+
+// si id n'existe pas => rajouter id + quantite
+// si id existe => rajouter que quantite
+// console.log(infoLocalStorage[1]._id);
+
+
 
 //SUPPRIMER UNE LIGNE DANS TABLEAU
 function supprimer(){
@@ -56,7 +78,7 @@ supprimer();
         });
     };
     
-////////////// AVEC MISE A JOUR DU LOCALSTORAGE
+////////////// AVEC MISE A JOUR DU LOCALSTORAGE/////////////
 // ok
 //CALCUL VERTICAL DU TABLEAU DES PRIX - SOMME DES LIGNES
 let prixToutTotal = document.getElementById('prix-tout-total');
@@ -74,6 +96,8 @@ if(infoLocalStorage > 0 || infoLocalStorage !== null){
 
         prixToutTotal.innerHTML = prixTableau.reduce(reducer2);
     };
+} else {
+    prixToutTotal.innerHTML = `0 euro`;
 };
 
 

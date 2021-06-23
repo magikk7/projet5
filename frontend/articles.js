@@ -7,7 +7,7 @@ const my_url = new URLSearchParams(queryString_url_id);//je crée une instance
 console.log(my_url);
 
 const page = my_url.get("name");//methode GET pour URL
-// console.log(page);//recup valeur
+//recup valeur
 
 
     // appel AJAX - requête server
@@ -107,6 +107,8 @@ const page = my_url.get("name");//methode GET pour URL
                 localStorage.setItem('caracteristiques', JSON.stringify(infoLocalStorage));
 
                 ajoutPanier();
+                
+                alert("Un produit est ajouté au panier");
             };
 
             //stocke en memoire les caracteristiques du meuble dans le local storage
