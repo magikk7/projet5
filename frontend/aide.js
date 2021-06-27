@@ -1,94 +1,85 @@
-let infoLocalStorage = JSON.parse(localStorage.getItem('caracteristiques'));
 let infoQuantiteTableau = parseInt(document.getElementById('info-quantite-tableau'));//pour panier vide
-let tbodyPanier = document.getElementById('tbody-panier');//le corps du panier
+let tbodyPanier = document.getElementById('tbody-panier');
 
-
-///ne pas afficher les memes données dans le tableau
-let tableau_id = infoLocalStorage;
-// console.log(tableau_id);
-let temp = tableau_id.reduce(
-    (acc, el) => {
-        return acc.add(el._id)
-    }, new Set()
-    );
-let tableau_sans_doublons = [...temp];
-// console.log(infoLocalStorage[0]._id == tableau_sans_doublons);
-
-
-
-
-if(infoLocalStorage == null || infoLocalStorage == 0){
-    infoQuantiteTableau.innerHTML = 'Votre panier est vide';//?? verifications
+if(localStorage == null || localStorage == 0){
+    infoQuantiteTableau.innerHTML = 'Votre panier est vide';
 } else {
-//partie HTML - visible sur le site avec la boucle for - informations et quantités repris du localstorage en cours
 
-    for(i=0; i<infoLocalStorage.length; i++){
-        if(infoLocalStorage[i]._id == tableau_sans_doublons){
-        tbodyPanier.innerHTML += `
-        <tr class="ligne-produit" id="${infoLocalStorage[i]._id}">
-            <td class="donnees-tableau center">${infoLocalStorage[i].name}</td>
-            <td class="donnees-tableau center quantite-produit">1</td>
-            <td class="donnees-tableau prix-unique-produit right">${infoLocalStorage[i].price}</td>
-            <td class="donnees-tableau right prix-total-produit"></td>
-            <td><button class="donnees-tablea btn-supprimer">Supprimer</button><td>
-        </tr>
-        `;   
-    }
-    else {
-        // let quantiteUn = document.getElementsByClassName('quantite-produit')[i].innerHTML;
-        // let quantiteProduit = document.getElementsByClassName('quantite-produit')[i];
 
-        //  // console.log(quantiteUn);
-        // quantiteProduit.innerHTML = parseInt(quantiteUn)  +1;        
-        
-        
-        // tbodyPanier.innerHTML += `
-        // <tr class="ligne-produit" id="${infoLocalStorage[i]._id}">
-        //     <td class="donnees-tableau center">${infoLocalStorage[i].name}</td>
-        //     <td class="donnees-tableau center quantite-produit">1</td>
-        //     <td class="donnees-tableau prix-unique-produit right">${infoLocalStorage[i].price}</td>
-        //     <td class="donnees-tableau right prix-total-produit"></td>
-        //     <td><button class="donnees-tablea btn-supprimer">Supprimer</button><td>
-        // </tr>
-        // `;   
+for (var i = 0; i < localStorage.length; i++) {
+    // console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
+    let key = localStorage.key(i);
+    let selectionMeublePanier = JSON.parse(localStorage.getItem(key));
+    // let key = localStorage.key(i);
+    // console.log(selectionMeublePanier[0]._id);
 
-    };
-        };
 
-// };
-// }else{
-// for(i=0; i<infoLocalStorage.length; i++){
-//     let quantiteUn = document.getElementsByClassName('quantite-produit')[i].innerHTML;
-//     let quantiteProduit = document.getElementsByClassName('quantite-produit')[i];
-//     // console.log(quantiteUn);
-//     quantiteProduit.innerHTML = parseInt(quantiteUn)  +1;
-    
-    //ajouter +1 au panier
-//     parseInt(quantitePlusUn)
-//     tbodyPanier.innerHTML += `
-//     <tr class="ligne-produit" id="${infoLocalStorage[i]._id}">
-//         <td class="donnees-tableau center">${infoLocalStorage[i].name}</td>
-//         <td class="donnees-tableau center quantite-produit">1</td>
-//         <td class="donnees-tableau prix-unique-produit right">${infoLocalStorage[i].price}</td>
-//         <td class="donnees-tableau right prix-total-produit"></td>
-//         <td><button class="donnees-tableau btn-supprimer">Supprimer</button><td>
-//     </tr>
-//     `;   
-// };
-// };
+    //partie HTML - visible sur le site avec la boucle for - informations et quantités repris du localstorage en cours
+    tbodyPanier.innerHTML += `
+    <tr class="ligne-produit" id="${key}">
+        <td class="donnees-tableau center">${selectionMeublePanier[0].name}</td>
 
+        <td class="donnees-tableau center">
+        <button class="moins">-</button>
+        <input type="number" value="1" class="quantite-produit center">
+        <button class="plus">+</button>
+        </td>
+
+        <td class="donnees-tableau prix-unique-produit right">${selectionMeublePanier[0].price}</td>
+        <td class="donnees-tableau right prix-total-produit"></td>
+        <td><button class="donnees-tablea btn-supprimer">Supprimer</button><td>
+    </tr>
+    `;   
+};
+};
+
+
+/////////décrémentatin et incrementation
+let decrementBtn = document.getElementsByClassName('moins');
+let incrementBtn = document.getElementsByClassName('plus');
+// console.log(incrementBtn);
+// console.log(decrementBtn);
+
+for(i=0; i<decrementBtn.length; i++){
+    let btn = decrementBtn[i];
+    btn.addEventListener('click', function(event){
+        console.log(event.target);
+
+    let inputNb = event.target.parentElement.children[1];
+    // console.log(inputNb);
+
+    let inputNb_value = inputNb.value
+    });
 
 };
-//<td class="donnees-tableau center"><input type="number" value="1" class="quantite-produit"></td></td>
-        
-// si 
-// // console.log(localStorage.caracteristiques);
-// est deja dans le tableau alors 
-// ne pas afficher mais ajouter 1
 
 
-// si id n'existe pas => rajouter id + quantite
-// si id existe => rajouter que quantite
-// console.log(infoLocalStorage[1]._id);
+//     // supprimer();
 
 
+// afficherPanier();
+
+//SUPPRIMER UNE LIGNE DANS TABLEAU
+// function supprimer(){
+//     let btnSupprimer = document.getElementsByClassName('btn-supprimer');
+
+//     for (i = 0; i < btnSupprimer.length; i++){
+//         btnSupprimer[i].addEventListener('click', function(event){
+//         event.target.parentElement.parentElement.remove();
+
+//         if(infoLocalStorage.length > 0){
+//         let infoLocalStorage = JSON.parse(localStorage.setItem('choixMeuble'));
+
+//         for(i = 0; i < infoLocalStorage.length; i++) {
+//             console.log(infoLocalStorage[i]);
+//         };
+//         };
+//     })};   
+// };
+
+
+// si ID.legnth    == 1 affiché HTML alors afficher
+//else l'article est existant dans votre panier, veuillez choisir la quantité dans le tableau
+// ne pas rajouté de ligne cdar duplicat
+
+//comment je trouve id.length

@@ -1,10 +1,10 @@
 //je recupere URL
 const queryString_url_id = window.location.search;
-console.log(queryString_url_id);
+// console.log(queryString_url_id);
 
 // je recupere ID dans URL avec un constructeur
 const my_url = new URLSearchParams(queryString_url_id);//je crée une instance
-console.log(my_url);
+// console.log(my_url);
 
 const page = my_url.get("name");//methode GET pour URL
 //recup valeur
@@ -15,13 +15,11 @@ const page = my_url.get("name");//methode GET pour URL
     let requete = new XMLHttpRequest();
 
     requete.onreadystatechange = function(){
-        console.log(this);
-        //si la requete est terminée et la réponse est prête et que la requête est à 200 (ok)
-        //else if soucis avec la requete afficher l'erreur statut 404
+        // console.log(this);
+        //si la requete est terminée et la réponse est prête et que la requête est à 200 (ok) else erreur renvoie à 404
         if (this.readyState == 4 && this.status == 200) {
             // elementMeuble.innerHTML = JSON.stringify(this.response)
-
-            //modifier le format des prix des meubles
+            // console.log(this); 
             let prix = `${this.response.price}`;
             // console.log(prix);
 
@@ -99,19 +97,22 @@ const page = my_url.get("name");//methode GET pour URL
                 price: `${this.response.price}`,
                 imageUrl: `${this.response.imageUrl}`
             };
+            // console.log(choixMeuble);
 
-            let infoLocalStorage = JSON.parse(localStorage.getItem('caracteristiques'));
+
+            let infoLocalStorage = JSON.parse(localStorage.getItem(choixMeuble._id));//valeur "dynamique" => représentée par ID
 
             const localstorage = function(){
-                infoLocalStorage.push(choixMeuble);
-                localStorage.setItem('caracteristiques', JSON.stringify(infoLocalStorage));
+                // ajoutPanier();
 
-                ajoutPanier();
+                infoLocalStorage.push(choixMeuble);
+                localStorage.setItem(choixMeuble._id, JSON.stringify(infoLocalStorage));//valeur "dynamique" => représentée par ID
                 
-                alert("Un produit est ajouté au panier");
+                alert("Un produit est ajouté au panier");//violation...
             };
 
-            //stocke en memoire les caracteristiques du meuble dans le local storage
+
+
             if(infoLocalStorage){
             localstorage();
                 
@@ -121,16 +122,16 @@ const page = my_url.get("name");//methode GET pour URL
             localstorage();
             };
 
-            //compteur pour avoir la quantité cliqué dans le PANIER
-            function ajoutPanier(){
-                let idPanier = document.getElementById('panier');
-                let compteur = localStorage.getItem('ajoutPanier');
+            // compteur pour avoir la quantité cliqué dans le PANIER
+            // function ajoutPanier(){
+            //     let idPanier = document.getElementById('panier');
+            //     let compteur = localStorage.getItem('ajoutPanier');
 
-                compteur++;
+            //     compteur++;
 
-                localStorage.setItem('ajoutPanier', compteur);
-                idPanier.innerHTML = `${compteur}`;
-            };
+            //     localStorage.setItem('ajoutPanier', compteur);
+            //     idPanier.innerHTML = `${compteur}`;
+            // };
         });        
             
         } else if (this.readyState == 4 && this.status == 404) {
@@ -143,4 +144,4 @@ const page = my_url.get("name");//methode GET pour URL
 requete.open('GET', 'http://localhost:3000/api/furniture/' + page, true);
 requete.responseType = "json";
 //envoie de la requête créée
-requete.send();
+requete.send(null);
