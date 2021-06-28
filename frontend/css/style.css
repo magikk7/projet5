@@ -166,6 +166,10 @@ main {
     background-color: whitesmoke;
 }
 
+.dimension-icone{
+    height: 15px;
+}
+
 .caracteristique-dimension {
     width: 50%;
     background: linear-gradient(45deg, rgb(24, 19, 114) 35%, rgba(9,9,121,1) 100%);

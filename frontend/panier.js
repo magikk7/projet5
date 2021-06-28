@@ -18,25 +18,16 @@ for (var i = 0; i < localStorage.length; i++) {
     tbodyPanier.innerHTML += `
     <tr class="ligne-produit" id="${key}">
         <td class="donnees-tableau center">${selectionMeublePanier[0].name}</td>
-
         <td class="donnees-tableau center">
-        <button class="moins">-</button>
-        
+            <button class="moins"><img src="img/moins.png" alt="#" class="dimension-icone"></button>
             <input type="text" class="quantite-produit-select center">
-         
-            
-        <button class="plus">+</button>
+            <button class="plus"><img src="img/plus.png" alt="#" class="dimension-icone"></button>
         </td>
-
         <td class="donnees-tableau prix-unique-produit right">${selectionMeublePanier[0].price}</td>
-        <td class="donnees-tableau right prix-total-produit"></td>
-        <td><button class="donnees-tablea btn-supprimer">Supprimer</button><td>
+        <td class="donnees-tableau right sous-total-produit"></td>
+        <td><button class="donnees-tablea btn-supprimer"><img src="img/supprime.png" alt="#" class="dimension-icone"></button><td>
     </tr>
-    `; 
-
-
-
-
+    `;
 };
     // intégrer valeur input page2 du produit => page3 tableau panier
     let quantiteProduitSelect = document.getElementsByClassName('quantite-produit-select');//collection=boucle
@@ -45,17 +36,32 @@ for (var i = 0; i < localStorage.length; i++) {
     for(i=0; i<quantiteProduitSelect.length; i++){
         // console.log(quantiteProduitSelect[i]);//ok
         let key = localStorage.key(i);
-        let coucou = JSON.parse(localStorage.getItem(key))
-        // console.log(coucou.length);//ok
-        quantiteProduitSelect[i].value = coucou.length;
+        let stockage = JSON.parse(localStorage.getItem(key))
+        // console.log(stockage.length);//ok
+        quantiteProduitSelect[i].value = stockage.length;
     };
+
+        // //recup des valeurs quantite et prix
+        // let quantiteSousTotal = document.getElementsByClassName('quantite-produit-select');
+        // for(i=0; i<quantiteSousTotal.length; i++) {
+        //     console.log(quantiteSousTotal[i].value)//ok
+        //     // console.log(quantiteSousTotal[i];//ok collection = faire boucle
+        // };
+
+        // // console.log(quantiteSousTotal)//ok collection = faire boucle
+
+        // let prixProduit  = document.getElementsByClassName('prix-unique-produit');
+        // for(i=0; i<prixProduit.length;i++) {
+        //     console.log(prixProduit[i].innerHTML)//ok
+        //     // console.log(prixProduit);//ok collection = faire boucle
+        // };
 };
 
 
-/////////décrémentatin et incrementation / QUANTITE MEUBLES
+/////////décrémentation et incrementation / QUANTITE MEUBLES
 let decrementBtn = document.getElementsByClassName('moins');
 let incrementBtn = document.getElementsByClassName('plus');
-// console.log(incrementBtn); // console.log(decrementBtn);
+// console.log(decrementBtn); // console.log(incrementBtn); 
 
 
 //decrementation
@@ -96,15 +102,46 @@ for(i=0; i<incrementBtn.length; i++){
 };
 
 
-////faire que la nouvelle valeur se calcule avec PRIX///////////////////
-let quantiteMeuble = document.getElementsByClassName('quantite-produit-select');//collection=boucle
-let inputt = document.querySelector('input'); console.log(inputt);
+
+//////////////////////SOUS TOTAL =>QUANTITE ET PRIX///////////////////
+
+        //recup valeurs quantites
+        let quantiteSousTotal = document.getElementsByClassName('quantite-produit-select');
+        for(b=0; b<quantiteSousTotal.length; b++) {
+            // console.log(quantiteSousTotal[i].value)//ok
+            // console.log(quantiteSousTotal[i];//ok collection = faire boucle
+            var reponse1 = parseInt(quantiteSousTotal[b].value);//string
+            console.log(reponse1)//number
+        };
+
+        
+        //recup valeurs quantites
+        let prixProduit  = document.getElementsByClassName('prix-unique-produit');
+        for(c=0; c<prixProduit.length;c++) {
+            // console.log(prixProduit[i].innerHTML)//ok
+            // console.log(prixProduit);//ok collection = faire boucle
+            var reponse2 = parseInt(prixProduit[c].innerHTML);//string
+            console.log(reponse2)//number
+        };
 
 
-let sousTotal = document.getElementsByClassName('prix-total-produit');//collection=boucle
-let prixMeuble = document.getElementsByClassName('prix-unique-produit');//collection=boucle
 
-    // quantiteMeuble.addEventListener('input', (event) => {
+let sousTotalProduit = document.getElementsByClassName('sous-total-produit');
+// console.log(sousTotalProduit)//ok collection = faire boucle
+for(a=0; a<sousTotalProduit.length; a++) {    
+sousTotalProduit[a].innerHTML = reponse1 * reponse2;
+};
+
+
+
+// let quantiteMeuble = document.getElementsByClassName('quantite-produit-select');//collection=boucle
+// let inputt = document.querySelector('input'); console.log(inputt);
+
+
+// let sousTotal = document.getElementsByClassName('prix-total-produit');//collection=boucle
+// let prixMeuble = document.getElementsByClassName('prix-unique-produit');//collection=boucle
+
+//     // quantiteMeuble.addEventListener('input', (event) => {
     //     // champ = event.target.value;
     //     // console.log(champ);
     //     // console.log(event);
@@ -112,22 +149,12 @@ let prixMeuble = document.getElementsByClassName('prix-unique-produit');//collec
     // console.log(quantiteMeuble)
 
 
-  
-
-    for(i=0; i < inputt.length; i++){
-        // console.log(inputt[i]);
-        inputt[i].addEventListener('input', (event) => {
-            event.target.value;
-console.log(event.target.value);
-
-    });
-    };
 
 
-    inputt.addEventListener('input', (event) => {
-        champ = event.target.value;
-        console.log(champ);
-    });
+
+
+
+
 
 //CALCUL HORIZONTAL DU TABLEAU - SOMME PAR LIGNE DE PRODUITS
 
