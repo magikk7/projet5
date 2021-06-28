@@ -49,9 +49,10 @@ main()
         <div id="selection-produit" class="card">
             <div class="card-body">
                 <h3 id="${produit.name}" class="card-title">${produit.name}</h3>
-                <img src="${produit.imageUrl}" class="card-img-top heightImg" alt="${produit.name}">
                 <hr>
-                <p class="prix">Prix : <span id="${produit.price}">${numStr(resultat,"")} &euro;</span></p>
+                <img src="${produit.imageUrl}" class="card-img-top heightImg-p1" alt="${produit.name}">
+                <hr>
+                <p class="prix"><span id="${produit.price}">${numStr(resultat,"")} &euro;</span></p>
                 <a href="article.html?name=${produit._id}" id="${produit._id}" class="btn btn-gradient mt-4">Voir la description</a>
             </div
         </div>  

@@ -1,15 +1,11 @@
 html, body {
+    width: 100%;
     height: 100%;
     font-size: 1rem;
 }
 
 .nav-image {
     flex: 4;
-}
-
-.nav-liens {
-    display: flex;
-    background-color: green;
 }
 
 .lien-accueil {
@@ -92,8 +88,14 @@ main {
     justify-content: center;
     align-items: center;
     
-    margin: 100px auto;
-    height: 250px;
+    margin: 100px 0;
+    /* height: 250px; */
+}
+
+#element-meuble {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .gallery {
@@ -133,7 +135,26 @@ main {
 }
 
 .btn-validation {
-    margin-top: 50px;
+    margin: 50px 0;
+}
+
+.boutons-page {
+    display: flex;
+    justify-content: space-around;
+}
+
+.page {
+    margin: 20px 0;
+}
+
+.gauche {
+    text-align: left;
+    margin-right: 20px;
+}
+
+.droite {
+    text-align: right;
+    margin-left: 20px;
 }
 
 .presentation-produit {
@@ -167,12 +188,26 @@ a {
     text-decoration: none;
 }
 
-.heightImg {
-    height: 230px;
+a:hover {
+    color: whitesmoke;
+}
+
+.card-body {
+    text-align: center;
+}
+
+
+.heightImg-p1 {
+    height: 300px;
+}
+
+.heightImg-p2 {
+    height: 300px;
+    width: 55%;
 }
 
 .prix {
-    font-size: 1.2rem;
+    font-size: 2rem;
     font-weight: bold;
 }
 

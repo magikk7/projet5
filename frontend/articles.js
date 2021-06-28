@@ -48,25 +48,43 @@ const page = my_url.get("name");//methode GET pour URL
         <div id="${this.response._id}" class="card">
             <div class="card-body">
                 <h3 id="${this.response.imageUrl}" class="card-title">${this.response.name}</h3>
-                <img src="${this.response.imageUrl}" class="card-img-top heightImg" alt="${this.response.name}">
-                    
+                <div class="image-meuble">
+                    <img src="${this.response.imageUrl}" class="card-img-top heightImg-p2" alt="${this.response.name}">
+                </div>    
+
                 <div class="card-body--descriptif">
                     <div class="descriptif">
                         <p class="description">${this.response.description}</p>
-                        <p class="prix">Prix : <span id="${this.response.price}">${numStr(resultat,"")} &euro;</span></p>
+                        <p class="prix">Prix :
+                        <span id="${this.response.price}">${numStr(resultat,"")} &euro;</span>
+                        </p>
                     </div>
                     <hr>
+
                     <form class="choix-dimension">
-                    <div>
-                        <label for="meubles" class="label-article">Choisir une couleur de vernis :</label>
-                        <select class="form-select" name="meubles" id="meubles"></select>
-                    </div>
-                
-                    <button class="btn btn-primary btn-validation" id="bouton_validation" type="button">Ajouter au panier</button>                    </a>
-                </form>
+                        <div>
+                            <label for="meubles" class="label-article">Choisir une couleur de vernis :</label>
+                            <select class="form-select" name="meubles" id="meubles"></select>
+                        </div>
+                        <button class="btn btn-success btn-validation increment-btn" id="bouton_validation" type="button">Ajouter au panier</button>
+                        
+                        <div>Quantité : <input type="text" class="counter" value="0"/></div>
+
+                    </form>
                 </div>
-            </div
-        </div>  
+
+                <hr>
+                <div class="boutons-page">
+                    <div class="col btn btn-primary page gauche">
+                        <a href="index.html">&lsaquo; Accueil</a>
+                    </div>
+            
+                    <div class="col btn btn-primary page droite">
+                        <a href="panier.html">Panier &rsaquo;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         `
     ;
 
@@ -99,6 +117,25 @@ const page = my_url.get("name");//methode GET pour URL
             };
             // console.log(choixMeuble);
 
+            ///////////compteur au click = qui vaut quantite meuble
+            let counter = document.querySelector('.counter');
+            counter.value = parseInt(counter.value) + 1;
+            // counter.value = localStorage.length;
+            
+    
+             // compteur pour avoir la quantité cliqué dans le PANIER
+            // function ajoutPanier(){
+            //     let idPanier = document.getElementById('panier');
+            //     let compteur = localStorage.getItem('ajoutPanier');
+
+            //     compteur++;
+
+            //     localStorage.setItem('ajoutPanier', compteur);
+            //     idPanier.innerHTML = `${compteur}`;
+            // };
+
+
+            
 
             let infoLocalStorage = JSON.parse(localStorage.getItem(choixMeuble._id));//valeur "dynamique" => représentée par ID
 
@@ -108,10 +145,8 @@ const page = my_url.get("name");//methode GET pour URL
                 infoLocalStorage.push(choixMeuble);
                 localStorage.setItem(choixMeuble._id, JSON.stringify(infoLocalStorage));//valeur "dynamique" => représentée par ID
                 
-                alert("Un produit est ajouté au panier");//violation...
+                alert("Un produit est ajouté au panier");//verbose...
             };
-
-
 
             if(infoLocalStorage){
             localstorage();
@@ -132,10 +167,10 @@ const page = my_url.get("name");//methode GET pour URL
             //     localStorage.setItem('ajoutPanier', compteur);
             //     idPanier.innerHTML = `${compteur}`;
             // };
-        });        
+        }, false);//ne fait pas "sauter" la page        
             
         } else if (this.readyState == 4 && this.status == 404) {
-            alert('Erreur 404 : Une erreur s\'est produite. La page est introuvable. ');
+            alert('Erreur 404 : Une erreur s\'est produite. La page est introuvable.');
         };
     };
 
