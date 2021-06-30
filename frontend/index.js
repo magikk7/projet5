@@ -26,7 +26,7 @@ main()
         let resultat = prix / 100;
         // console.log(resultat);
 
-        // mettre un séparateur des milliers
+        // CHIFFRES => mettre un séparateur des milliers
         function numStr(a, b) {
             a = '' + a;
             b = b || ' ';

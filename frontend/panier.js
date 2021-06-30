@@ -7,11 +7,8 @@ if(localStorage == null || localStorage == 0){
 
 
 for (var i = 0; i < localStorage.length; i++) {
-    // console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
     let key = localStorage.key(i);
     let selectionMeublePanier = JSON.parse(localStorage.getItem(key));
-    // let key = localStorage.key(i); 
-    // console.log(selectionMeublePanier[0]._id);
 
 
     //partie HTML - visible sur le site avec la boucle for - informations et quantités repris du localstorage en cours
@@ -40,21 +37,6 @@ for (var i = 0; i < localStorage.length; i++) {
         // console.log(stockage.length);//ok
         quantiteProduitSelect[i].value = stockage.length;
     };
-
-        // //recup des valeurs quantite et prix
-        // let quantiteSousTotal = document.getElementsByClassName('quantite-produit-select');
-        // for(i=0; i<quantiteSousTotal.length; i++) {
-        //     console.log(quantiteSousTotal[i].value)//ok
-        //     // console.log(quantiteSousTotal[i];//ok collection = faire boucle
-        // };
-
-        // // console.log(quantiteSousTotal)//ok collection = faire boucle
-
-        // let prixProduit  = document.getElementsByClassName('prix-unique-produit');
-        // for(i=0; i<prixProduit.length;i++) {
-        //     console.log(prixProduit[i].innerHTML)//ok
-        //     // console.log(prixProduit);//ok collection = faire boucle
-        // };
 };
 
 
@@ -131,22 +113,6 @@ let sousTotalProduit = document.getElementsByClassName('sous-total-produit');
 for(a=0; a<sousTotalProduit.length; a++) {    
 sousTotalProduit[a].innerHTML = reponse1 * reponse2;
 };
-
-
-
-// let quantiteMeuble = document.getElementsByClassName('quantite-produit-select');//collection=boucle
-// let inputt = document.querySelector('input'); console.log(inputt);
-
-
-// let sousTotal = document.getElementsByClassName('prix-total-produit');//collection=boucle
-// let prixMeuble = document.getElementsByClassName('prix-unique-produit');//collection=boucle
-
-//     // quantiteMeuble.addEventListener('input', (event) => {
-    //     // champ = event.target.value;
-    //     // console.log(champ);
-    //     // console.log(event);
-    // });
-    // console.log(quantiteMeuble)
 
 
 

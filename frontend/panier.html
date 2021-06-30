@@ -21,7 +21,7 @@
                 <img src="img/logo.png" alt="logo confort à ma maison" height="100">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
@@ -30,7 +30,6 @@
                         <a class="nav-link active" aria-current="page" href="index.html">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <!-- <a class="nav-link" href="panier.html"><img src="img/shopping-cart.png" alt="#" class="img-panier"><span id="panier">0</span></a> -->
                         <a class="nav-link" href="panier.html"><img src="img/shopping-cart.png" alt="#" class="img-panier"></a>
                     </li>
                 </ul>
@@ -38,110 +37,107 @@
         </div>
     </nav>
 
-    <h1>Commande : </h1>
+    
+    <div class="container-fluid gradient my-5 p-5">
+        <div class="row">
+            <div class="col">
+                <h1 class="color-light">Ma commande : </h1>
+            </div>
+        </div>
+    </div>
+    
+
 <!-- partie sous JS -->
-    <main class="page-header main-panier" id="table-panier">
-        <h2>Votre panier : </h2>
-        
-        <table class="tableau">
-            <thead class="center">
-                <tr>
-                    <th class="titre-tableau">Meuble</th>
-                    <th class="titre-tableau">Quantité</th>
-                    <th class="titre-tableau">Prix</th>
-                    <th class="titre-tableau calcul-somme-ligne">Sous-Total</th>
-                    <th class="titre-tableau">Supprimer</th>
-                </tr>
-            </thead>
+    <main class="container page-header main-panier" id="table-panier">        
+        <div class="row">
+            <div class="col">
+                <table class="tableau">
+                    <thead class="center">
+                        <tr>
+                            <th class="titre-tableau">Meuble</th>
+                            <th class="titre-tableau">Quantité</th>
+                            <th class="titre-tableau">Prix</th>
+                            <th class="titre-tableau calcul-somme-ligne">Sous-Total</th>
+                            <th class="titre-tableau">Supprimer</th>
+                        </tr>
+                    </thead>
 
-            <!-- tableau des produits du panier -->
-            <tbody id="tbody-panier">                
-            </tbody>
+                    <!-- tableau des produits du panier -->
+                    <tbody id="tbody-panier">                
+                    </tbody>
 
-            <tbody id="tbody-total">  
-                <tr>
-                    <td class="donnees-tableau right gras"></td>
-                    <!-- somme des quantites -->
-                    <td class="donnees-tableau right gras"></td>
-                    <td class="donnees-tableau right gras"></td>
-                    <td class="donnees-tableau right gras" id="prix-tout-total"></td>
-                    <td class="donnees-tableau right gras"></td>
-                </tr>         
-                <tr>
-                    <td>Supprimer mon panier</td>
-                    <td class="donnees-tableau right gras"></td>
-                    <td class="donnees-tableau right gras"></td>
-                    <td class="donnees-tableau right gras"></td>
-                    <td class="donnees-tableau right gras"></td>
-                </tr>
-            </tbody>
-        </table>
+                    <tbody id="tbody-total">  
+                        <tr>
+                            <td colspan="3" class="donnees-tableau right gras">TOTAL</td>
+                            <td colspan="2" class="donnees-tableau right gras" id="prix-tout-total">...</td>
+                        </tr>         
+                        <tr>
+                            <td colspan="4" class="donnees-tableau right gras">Supprimer mon panier</td>
+                            <td class="donnees-tableau right gras" id="clear-all">...</td>
+                        </tr>
+                    </tbody>
+                </table>
 
         <!-- info panier = vide -->
         <p id="info-quantite-tableau" class="panier-vide"></p>
 
+            </div>
+        </div>
+        
+        <hr>
 
 <!-- partie 2 -->
-        <p>Valider ma commande
-            bouton validation =>activer le formulaire
-        </p>
-
         <!-- partie du formulaire -->
-        <h2>Formulaire de validation : </h2>
+        <h2 class="center my-5">Formulaire de validation : </h2>
 
         <div class="container">
             <div class="row">
                 <div class="col">
                     <form action="#" method="post">
-                        <div class="form-group">
-                            <label for="nom"></label>
+                        <div class="mb-3">
+                            <label for="nom" class="form-label"></label>
                             <input type="text" name="nom" placeholder="Nom" id="nom" class="form-control" required="required">
                         </div>
-                        <div class="form-group">
-                            <label for="prenom"></label>
+                        <div class="mb-3">
+                            <label for="prenom" class="form-label"></label>
                             <input type="text" name="prenom" placeholder="Prénom" id="prenom" class="form-control" required="required">
                         </div>
-                        <div class="form-group">
-                            <label for="adresse"></label>
+                        <div class="mb-3">
+                            <label for="adresse" class="form-label"></label>
                             <input type="text" name="adresse" placeholder="Adresse" id="adresse" class="form-control" required="required">
                         </div>
-                        <div class="form-group">
-                            <label for="code-postal"></label>
+                        <div class="mb-3">
+                            <label for="code-postal" class="form-label"></label>
                             <input type="text" name="code-postal" placeholder="Code Postal" id="code-postal" class="form-control">
                         </div>
-                        <div class="form-group">
-                            <label for="ville"></label>
+                        <div class="mb-3">
+                            <label for="ville" class="form-label"></label>
                             <input type="text" name="ville" placeholder="Ville" id="ville" class="form-control" required="required">
                         </div>
-                        <div class="form-group">
-                            <label for="email"></label>
+                        <div class="mb-3">
+                            <label for="email" class="form-label"></label>
                             <input type="email" name="email" placeholder="Adresse email" id="email" class="form-control" required="required">
                         </div>
                         <br>
                         <br>
-                        <div class="form-group">
-                            <input type="submit" value="Valider">
+                        <!-- validation du formulaire -->
+                        <div class="mb-3 center">
+                            <button type="submit" class="btn btn-primary">Valider</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-
-        <!-- après validation du formulaire -->
-        <p>Valider ma commande
-            bouton validation =>activer le formulaire
-
-            recup information du panier sur prochaine page
-        </p>
 </main>
 
-    <footer class="gradient">
-        <div class="container-fluid text-center">
-                Produits fabriqués en France
-        </div>
-    </footer>
+        <footer class="container-fluid text-center gradient">
+            <div class="row">
+                <div class="col">
+                    Produits fabriqués en France
+                </div>
+            </div>
+        </footer>
 
-    <!-- <script src="panier.js"></script> -->
     <script src="panier.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

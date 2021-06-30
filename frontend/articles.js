@@ -1,4 +1,4 @@
-//je recupere URL
+//URL à récupérer
 const queryString_url_id = window.location.search;
 // console.log(queryString_url_id);
 
@@ -26,7 +26,7 @@ const page = my_url.get("name");//methode GET pour URL
             let resultat = prix / 100;
             // console.log(resultat);
 
-            // mettre un séparateur des milliers
+            // CHIFFRES => mettre un séparateur des milliers
             function numStr(a, b) {
                 a = '' + a;
                 b = b || ' ';
@@ -88,7 +88,7 @@ const page = my_url.get("name");//methode GET pour URL
         `
     ;
 
-        // boucle do while - pour incrémenter les options de couleur de vernis
+        // OPTION VERNIS => boucle do while - pour lister les choix d'options couleurs vernis
         let i = 0;
 
         do {
@@ -140,7 +140,6 @@ const page = my_url.get("name");//methode GET pour URL
             let infoLocalStorage = JSON.parse(localStorage.getItem(choixMeuble._id));//valeur "dynamique" => représentée par ID
 
             const localstorage = function(){
-                // ajoutPanier();
 
                 infoLocalStorage.push(choixMeuble);
                 localStorage.setItem(choixMeuble._id, JSON.stringify(infoLocalStorage));//valeur "dynamique" => représentée par ID
@@ -157,16 +156,6 @@ const page = my_url.get("name");//methode GET pour URL
             localstorage();
             };
 
-            // compteur pour avoir la quantité cliqué dans le PANIER
-            // function ajoutPanier(){
-            //     let idPanier = document.getElementById('panier');
-            //     let compteur = localStorage.getItem('ajoutPanier');
-
-            //     compteur++;
-
-            //     localStorage.setItem('ajoutPanier', compteur);
-            //     idPanier.innerHTML = `${compteur}`;
-            // };
         }, false);//ne fait pas "sauter" la page        
             
         } else if (this.readyState == 4 && this.status == 404) {
