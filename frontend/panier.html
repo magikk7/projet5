@@ -51,7 +51,7 @@
     <main class="container page-header main-panier" id="table-panier">        
         <div class="row">
             <div class="col">
-                <table class="tableau">
+                <table class="tableau" id="produits-tableau">
                     <thead class="center">
                         <tr>
                             <th class="titre-tableau">Meuble</th>
@@ -65,54 +65,52 @@
                     <!-- tableau des produits du panier -->
                     <tbody id="tbody-panier">                
                     </tbody>
-
+                    <!-- totaux -->
                     <tbody id="tbody-total">  
                         <tr>
-                            <td colspan="3" class="donnees-tableau right gras">TOTAL</td>
-                            <td colspan="2" class="donnees-tableau right gras" id="prix-tout-total">...</td>
+                            <td colspan="2" class="donnees-tableau right gras">TOTAL</td>
+                            <td colspan="3" class="donnees-tableau right gras" id="prix-tout-total">...</td>
                         </tr>         
                         <tr>
-                            <td colspan="4" class="donnees-tableau right gras">Supprimer mon panier</td>
-                            <td class="donnees-tableau right gras" id="clear-all">...</td>
+                            <td colspan="2" class="donnees-tableau right gras">Supprimer mon panier</td>
+                            <td colspan="3" class="donnees-tableau right gras" id="clear-all"><button>Tout supprimer</button></td>
                         </tr>
                     </tbody>
                 </table>
 
-        <!-- info panier = vide -->
-        <p id="info-quantite-tableau" class="panier-vide"></p>
-
+                <!-- info panier = vide -->
+                <p id="info-quantite-tableau" class="panier-vide"></p>
             </div>
         </div>
         
         <hr>
 
 <!-- partie 2 -->
+<div class="container">
+    <div class="row">
+        <div class="col">
         <!-- partie du formulaire -->
-        <h2 class="center my-5">Formulaire de validation : </h2>
-
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <form action="#" method="post">
+            <h2 class="center my-5">Formulaire de validation : </h2>
+                    <form action="confirmation.html" method="post">
                         <div class="mb-3">
-                            <label for="nom" class="form-label"></label>
-                            <input type="text" name="nom" placeholder="Nom" id="nom" class="form-control" required="required">
+                            <label for="lastName" class="form-label"></label>
+                            <input type="text" name="lastName" placeholder="Nom" id="lastName" class="form-control" required="required">
                         </div>
                         <div class="mb-3">
-                            <label for="prenom" class="form-label"></label>
-                            <input type="text" name="prenom" placeholder="Prénom" id="prenom" class="form-control" required="required">
+                            <label for="firstName" class="form-label"></label>
+                            <input type="text" name="firstName" placeholder="Prénom" id="firstName" class="form-control" required="required">
                         </div>
                         <div class="mb-3">
-                            <label for="adresse" class="form-label"></label>
-                            <input type="text" name="adresse" placeholder="Adresse" id="adresse" class="form-control" required="required">
+                            <label for="adress" class="form-label"></label>
+                            <input type="text" name="adress" placeholder="Adresse" id="adress" class="form-control" required="required">
                         </div>
                         <div class="mb-3">
                             <label for="code-postal" class="form-label"></label>
                             <input type="text" name="code-postal" placeholder="Code Postal" id="code-postal" class="form-control">
                         </div>
                         <div class="mb-3">
-                            <label for="ville" class="form-label"></label>
-                            <input type="text" name="ville" placeholder="Ville" id="ville" class="form-control" required="required">
+                            <label for="city" class="form-label"></label>
+                            <input type="text" name="city" placeholder="Ville" id="city" class="form-control" required="required">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label"></label>

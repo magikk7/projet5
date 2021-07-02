@@ -123,3 +123,43 @@ if(infoLocalStorage > 0 || infoLocalStorage !== null){
         //     // console.log(infoLocalStorage.splice(0, 1));
         // console.log(localStorage.removeItem('caracteristiques'));
         // };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+////////////////////////pour un calcul VERTICAL oui////////////////////
+            
+
+//PRIX
+        // let prixProduit  = document.getElementsByClassName('prix-unique-produit');
+        // // console.log(typeof parseInt(prixProduit));
+        
+        
+        // for(c=0; c<prixProduit.length;c++) {
+        //     // console.log(prixProduit[i].innerHTML)//ok
+        //     var reponse2 = parseInt(prixProduit[c].innerHTML);//string
+        //     console.log(parseInt(prixProduit[c].innerHTML));//number//ok
+        // };
+
+
+//LONGUEUR TABLEAU
+/////////////////VERTICAL pour calcul TOTAUX
+        // let sousTotalProduit = document.getElementsByClassName('sous-total-produit');
+        
+        // // console.log(sousTotalProduit);
+        // for(i=0; i<sousTotalProduit.length; i++){
+        //     let prixProduit  = document.getElementsByClassName('prix-unique-produit');
+        // //     console.log(prixProduit);
+        // // console.log(sousTotalProduit[i].innerHTML);
+        // };
