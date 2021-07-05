@@ -60,19 +60,15 @@ const page = my_url.get("name");//methode GET pour URL
                         </p>
                     </div>
                     <hr>
-
                     <form class="choix-dimension">
                         <div>
                             <label for="meubles" class="label-article">Choisir une couleur de vernis :</label>
                             <select class="form-select" name="meubles" id="meubles"></select>
                         </div>
                         <button class="btn btn-success btn-validation increment-btn" id="bouton_validation" type="button">Ajouter au panier</button>
-                        
                         <div>Quantité : <input type="text" class="counter" value="0"/></div>
-
                     </form>
                 </div>
-
                 <hr>
                 <div class="boutons-page">
                     <div class="col btn btn-primary page gauche">

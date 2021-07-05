@@ -1,4 +1,7 @@
 html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     width: 100%;
     height: 100%;
     font-size: 1rem;
@@ -255,6 +258,10 @@ tbody tr, td, th {
 
 .right {
     text-align: right;
+}
+
+.left {
+    text-align: left;
 }
 
 .center {
