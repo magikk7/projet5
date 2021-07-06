@@ -1,15 +1,14 @@
 let infoQuantiteTableau = parseInt(document.getElementById('info-quantite-tableau'));//pour panier vide
-let tbodyPanier = document.getElementById('tbody-panier');        
+let tbodyPanier = document.getElementById('tbody-panier');      
 
 
     if(localStorage == null || localStorage == 0){
         infoQuantiteTableau.innerHTML = 'Votre panier est vide';
     } else {
 
-
     for (i = 0; i < localStorage.length; i++) {
-        var key = localStorage.key(i);
-        var selectionMeublePanier = JSON.parse(localStorage.getItem(key));
+        var key = localStorage.key(i);//console.log(key);
+        var selectionMeublePanier = JSON.parse(localStorage.getItem(key));//console.log(selectionMeublePanier);
 
 
         //partie HTML - visible sur le site avec la boucle for - informations et quantités repris du localstorage en cours
@@ -25,6 +24,7 @@ let tbodyPanier = document.getElementById('tbody-panier');
         </tr>
         `;
     };
+
 
 ////////////////////////////////////SUPPRIMER LIGNE DU PANIER////////////////////////////////////////////
 
@@ -131,8 +131,10 @@ let tbodyPanier = document.getElementById('tbody-panier');
             return quantiteProduitParLigne * chiffreCoutP;
         };
         // console.log(multiplication());
-        sousTotalP.innerHTML = multiplication();
-    }
+        sousTotalP.innerHTML = multiplication() + ' &euro;';
+        // console.log(sousTotalP.innerHTML = multiplication() + ' &euro;')
+    };
+    
 
     ////////////////////////////////////TOTAL => CALCUL VERTICAL////////////////////////////////////////////
 
@@ -160,7 +162,7 @@ let tbodyPanier = document.getElementById('tbody-panier');
                     // console.log(somme);
 
                     //TOTAL du panier
-                    totalPanier.innerHTML = somme;
+                    totalPanier.innerHTML = `${somme} &euro;`;
                     }else{
                         totalPanier.innerHTML = `0 &euro;`;
                 };
@@ -168,69 +170,60 @@ let tbodyPanier = document.getElementById('tbody-panier');
         };
         sommeDuPanier();
     };
-
+    
 
         /////////////////////////formulaire a envoyer au serveur//////////////////////////////////
+        if(localStorage.length > 0){
 let formulaire = document.getElementById('formulaire');// console.log(formulaire);
-let envoieFormulaire = document.getElementById('envoie-formulaire');//console.log(envoieFormulaire);
+// let envoieFormulaire = document.getElementById('envoie-formulaire');//console.log(envoieFormulaire);
 
-let lastname = document.getElementById('lastName').value; //console.log(lastname);
-let firstname = document.getElementById('firstName').value;//console.log(firstname);
-let address = document.getElementById('address').value;//console.log(address);
-let city = document.getElementById('city').value;//console.log(city)
-let email = document.getElementById('email').value;//console.log(email);
+let lastname = document.getElementById('lastName').innerHTML; 
+console.log(lastname);
+let firstname = document.getElementById('firstName').value;
+// console.log(firstname);
+let address = document.getElementById('address').value;
+// console.log(address);
+let city = document.getElementById('city').value;
+// console.log(city)
+let email = document.getElementById('email').value;
+// console.log(email);
+let totalPanier = document.getElementById('prix-tout-total');
+// console.log(totalPanier);//ok
+
+let sommePanier = parseInt(totalPanier.innerHTML);
+// console.log(sommePanier);//ok
 
 ////le localstorage == panier enregistré
 let product_id = [];
 let value_product = [];
-/////////////////::
-for(i=0, len=localStorage.length; i<len; i++) {
+//
+for(i=0; i<localStorage.length; i++) {
     var key = localStorage.key(i);
     var value = localStorage[key];
-    console.log(key + " => " + value);
-
+    // console.log(key + " => " + value);
 
     product_id.push(key)
 
-    console.log(product_id)
-    console.log(typeof product_id) 
-    console.log(value)
     value_product.push(value)
-    console.log(value_product)
-}
+    // console.log(value_product)//localStorage Categorie de meubles
+};
 
-
-
-////le localstorage == panier enregistré
-// let product_id = [];
-
-// // for(i=0; localStorage.length; i++){
-//     var key = localStorage.key(i);
-//     var value = localStorage[key];
-//     console.log(key + " => " + value);
-
-//     product_id.push(key);
-
-//     console.log(product_id);
-    // console.log(typeof product_id);
-// };
-
-// formulaire.addEventListener('submit', function(event){
-// // console.log(event);
-// event.preventDefault();
+formulaire.addEventListener('submit', function(event){
+// console.log(event);
+event.preventDefault();
 
 
 let data = {
     contact:{
         lastName: 'lastname',
         firstName: 'firstname',
-        address: 'adresse',
+        address: 'address',
         city: 'city',
-        email: 'email',
+        email: 'email'
     },
     products: product_id
-}
-        
+};
+console.log(data)
 
 fetch("http://localhost:3000/api/furniture/order",
 {
@@ -243,3 +236,8 @@ fetch("http://localhost:3000/api/furniture/order",
 })
 .then(function(res){ console.log(res) })
 .catch(function(res){ console.log(res) })
+});
+
+        }else{
+            alert('Veuillez faire votre commande en premier.');
+        }
