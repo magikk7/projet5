@@ -1,5 +1,5 @@
 let infoQuantiteTableau = parseInt(document.getElementById('info-quantite-tableau'));//pour panier vide
-let tbodyPanier = document.getElementById('tbody-panier');
+let tbodyPanier = document.getElementById('tbody-panier');        
 
 
     if(localStorage == null || localStorage == 0){
@@ -26,7 +26,7 @@ let tbodyPanier = document.getElementById('tbody-panier');
         `;
     };
 
-//   ////////////////////////////////////SUPPRIMER LIGNE DU PANIER////////////////////////////////////////////
+////////////////////////////////////SUPPRIMER LIGNE DU PANIER////////////////////////////////////////////
 
         let btnSupprimer = document.getElementsByClassName('btn-supprimer');
           // console.log(btnSupprimer);
@@ -165,7 +165,7 @@ let tbodyPanier = document.getElementById('tbody-panier');
                         totalPanier.innerHTML = `0 &euro;`;
                 };
             };
-        };;
+        };
         sommeDuPanier();
     };
 
@@ -174,51 +174,72 @@ let tbodyPanier = document.getElementById('tbody-panier');
 let formulaire = document.getElementById('formulaire');// console.log(formulaire);
 let envoieFormulaire = document.getElementById('envoie-formulaire');//console.log(envoieFormulaire);
 
-let lastname = document.getElementById('lastName').innerHTML; console.log(lastname);
+let lastname = document.getElementById('lastName').value; //console.log(lastname);
 let firstname = document.getElementById('firstName').value;//console.log(firstname);
 let address = document.getElementById('address').value;//console.log(address);
 let city = document.getElementById('city').value;//console.log(city)
 let email = document.getElementById('email').value;//console.log(email);
 
-
-formulaire.addEventListener('submit', function(event){
-// console.log(event);
-event.preventDefault();
-
-//OBJET => CONTACT CLIENT
-//TABLEAU => PANIER VALIDE => localStorage
-// methode POST // array de strings product_id => meubles
-    let contact = {
-        lastName: lastname,
-        firstName: firstname,
-        address: address,
-        city: city,
-        email: email,
-    };        
-
-    
-    console.log(contact);
+////le localstorage == panier enregistré
+let product_id = [];
+let value_product = [];
+/////////////////::
+for(i=0, len=localStorage.length; i<len; i++) {
+    var key = localStorage.key(i);
+    var value = localStorage[key];
+    console.log(key + " => " + value);
 
 
+    product_id.push(key)
 
-// fetch('http://localhost:3000/api/furniture/order', {
-//     method: 'POST',
-//     headers: {'Content-Type': 'application/json; charset=UTF-8'},    
-//     body: JSON.stringify(contact),
-//             mode: 'cors',
-//             cache: 'default' 
-// })
-// .then(function(response){
-//             if(response.ok){
-//                 console.log(response);
-//             }else{
-//                 console.log(response.statusText);
-/
-//             return response.json();
-//         })
-// .then(function(){
-
-//         });
-// });
+    console.log(product_id)
+    console.log(typeof product_id) 
+    console.log(value)
+    value_product.push(value)
+    console.log(value_product)
+}
 
 
+
+////le localstorage == panier enregistré
+// let product_id = [];
+
+// // for(i=0; localStorage.length; i++){
+//     var key = localStorage.key(i);
+//     var value = localStorage[key];
+//     console.log(key + " => " + value);
+
+//     product_id.push(key);
+
+//     console.log(product_id);
+    // console.log(typeof product_id);
+// };
+
+// formulaire.addEventListener('submit', function(event){
+// // console.log(event);
+// event.preventDefault();
+
+
+let data = {
+    contact:{
+        lastName: 'lastname',
+        firstName: 'firstname',
+        address: 'adresse',
+        city: 'city',
+        email: 'email',
+    },
+    products: product_id
+}
+        
+
+fetch("http://localhost:3000/api/furniture/order",
+{
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    method: "POST",
+    body: JSON.stringify(data)
+})
+.then(function(res){ console.log(res) })
+.catch(function(res){ console.log(res) })
