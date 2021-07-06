@@ -173,20 +173,9 @@ let tbodyPanier = document.getElementById('tbody-panier');
     
 
         /////////////////////////formulaire a envoyer au serveur//////////////////////////////////
-        if(localStorage.length > 0){
 let formulaire = document.getElementById('formulaire');// console.log(formulaire);
 // let envoieFormulaire = document.getElementById('envoie-formulaire');//console.log(envoieFormulaire);
 
-let lastname = document.getElementById('lastName').innerHTML; 
-console.log(lastname);
-let firstname = document.getElementById('firstName').value;
-// console.log(firstname);
-let address = document.getElementById('address').value;
-// console.log(address);
-let city = document.getElementById('city').value;
-// console.log(city)
-let email = document.getElementById('email').value;
-// console.log(email);
 let totalPanier = document.getElementById('prix-tout-total');
 // console.log(totalPanier);//ok
 
@@ -202,7 +191,7 @@ for(i=0; i<localStorage.length; i++) {
     var value = localStorage[key];
     // console.log(key + " => " + value);
 
-    product_id.push(key)
+    // product_id.push(key);console.log(product_id.push(key))//reponse 2
 
     value_product.push(value)
     // console.log(value_product)//localStorage Categorie de meubles
@@ -212,18 +201,17 @@ formulaire.addEventListener('submit', function(event){
 // console.log(event);
 event.preventDefault();
 
-
 let data = {
     contact:{
-        lastName: 'lastname',
-        firstName: 'firstname',
-        address: 'address',
-        city: 'city',
-        email: 'email'
+        lastName: document.getElementById('lastName').value,
+        firstName: document.getElementById('firstName').value,
+        address: document.getElementById('address').value,
+        city: document.getElementById('city').value,
+        email: document.getElementById('email').value
     },
     products: product_id
 };
-console.log(data)
+// console.log(data);
 
 fetch("http://localhost:3000/api/furniture/order",
 {
@@ -234,10 +222,12 @@ fetch("http://localhost:3000/api/furniture/order",
     method: "POST",
     body: JSON.stringify(data)
 })
-.then(function(res){ console.log(res) })
-.catch(function(res){ console.log(res) })
-});
+.then(function(res){ return res.json();}
 
-        }else{
-            alert('Veuillez faire votre commande en premier.');
-        }
+)
+.then(function(data){ 
+    alert( JSON.stringify( data ),
+    //recup de l'id
+    console.log('Votre id est : ' + Object.values(data)[2]))
+});
+});
