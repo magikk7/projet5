@@ -7,7 +7,7 @@ let tbodyPanier = document.getElementById('tbody-panier');
         infoQuantiteTableau.innerHTML = 'Votre panier est vide';
     } else {
 
-    for (i = 0; i < localStorage.length; i++) {
+    for (i = 0; i < localStorage.length; i++){
         var key = localStorage.key(i);//console.log(key);
         var selectionMeublePanier = JSON.parse(localStorage.getItem(key));//console.log(selectionMeublePanier);
 
@@ -58,11 +58,11 @@ let tbodyPanier = document.getElementById('tbody-panier');
                 totalPanier.innerHTML = `0 &euro;`;
             };
         };
-        supprimer()
+        supprimer();
 
 
         ////////////////////// tout supprimer/////////////////
-        let supprimerPanier = document.getElementById('supprimer-panier')//;console.log(supprimerPanier);
+        let supprimerPanier = document.getElementById('supprimer-panier');//;console.log(supprimerPanier);
 
         let leParentPourTableau = document.getElementById('tbody-panier');// console.log(leParentPourTableau);//ok
 
@@ -177,10 +177,10 @@ let tbodyPanier = document.getElementById('tbody-panier');
 
     ////valider lastname
     formulaire.lastName.addEventListener('change', function(){
-        validEmail(this);
+        validLastName(this);
     });
 
-    const validEmail = function(inputLastName){
+    const validLastName = function(inputLastName){
         let lastNameRegex = new RegExp('^[A-Z][A-Za-z\é\è\ê\-]{2,30}$');        
 
     let testLastName = lastNameRegex.test(inputLastName.value);
@@ -191,6 +191,76 @@ let tbodyPanier = document.getElementById('tbody-panier');
     }else{
     refus.innerHTML = "Nom de famille non validée";
     };
+
+
+    ////valider firstname
+    formulaire.firstName.addEventListener('change', function(){
+        validFirstName(this);
+    });
+
+    const validFirstName = function(inputFirstName){
+        let firstNameRegex = new RegExp('^[A-Z][A-Za-z\é\è\ê\-]{2,30}$');        
+
+    let testFirstName = firstNameRegex.test(inputFirstName.value);
+        let refus = inputFirstName.nextElementSibling;
+    // console.log(testLastName
+    if(testFirstName){
+    refus.innerHTML = "Prénom valide";
+    }else{
+    refus.innerHTML = "Prénom non validé";
+    };
+
+    ////valider city
+    formulaire.city.addEventListener('change', function(){
+        validCity(this);
+    });
+
+    const validCity = function(inputCity){
+        let cityRegex = new RegExp('^\p{Lu}\p{L}*(?:[\s-]\p{Lu}\p{L}*)*$');        
+        // ^\p{Lu}\p{L}*(?:[\s-]\p{Lu}\p{L}*)*$ 
+    let testCity = cityRegex.test(inputCity.value);
+        let refus = inputCity.nextElementSibling;
+    // console.log(testCity)
+    if(testCity){
+    refus.innerHTML = "Ville valide";
+    }else{
+    refus.innerHTML = "Ville non valide";
+    };
+
+
+    ////valider addresse
+    formulaire.address.addEventListener('change', function(){
+        validAddress(this);
+    });
+
+    const validAddress = function(inputAddress){
+        let addressRegex = new RegExp('');
+        
+        let testAddress = addressRegex.test(inputAddress.value);
+            let refus = inputAddress.nextElementSibling;
+        // console.log(testAddress)
+        if(testAddress){
+        refus.innerHTML = "Addresse valide";
+        }else{
+        refus.innerHTML = "Addresse non validée";
+        };
+
+        ////valider email///////////////////////////////////////////////////////////////////
+    formulaire.email.addEventListener('change', function(){
+        validEmail(this);
+    });
+
+    const validEmail = function(inputEmail){
+        let emailRegex = new RegExp('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$');
+        
+        let testEmail = emailRegex.test(inputEmail.value);
+            let refus = inputEmail.nextElementSibling;
+        // console.log(testEmail)
+        if(testEmail){
+        refus.innerHTML = "Addresse Email valide";
+        }else{
+        refus.innerHTML = "Addresse Email valide";
+        };
 
     
     // si panier vide => VALIDATION formulaire pas possible
@@ -251,12 +321,15 @@ let tbodyPanier = document.getElementById('tbody-panier');
                     <div class="col alert alert-success" role="alert">
                     Nous vous confirmons que votre commande n°${Object.values(data)[2]} d'un montant de ${totalPanier.innerHTML} a bien été validée.<br>Nous vous en remercions. A bientôt sur notre site.
                     </div>
-                </div>`
+                </div>`;
 
                 // suppression localstorage après confirmation
                 localStorage.clear();
             });
             });
-}}
-    //  }
+        }};
+    };
+};
+};
+};
 // accepterFormulaire();
