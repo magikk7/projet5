@@ -29,9 +29,6 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="index.html">Accueil</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="panier.html"><img src="img/shopping-cart.png" alt="#" class="img-panier"></a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -46,9 +43,12 @@
         </div>
         
         <div class="row">
-            <div class="col" id="commandeValide">
-                <p>N° commande : <span id="numeroCommande"></span></p>
-                <p> Montant Commande : <span  id="montantCommande"></span></p>
+            <div class="col alert alert-success" role="alert">
+                <p class="para-confirm">Nous vous confirmons que votre commmande n° 
+                    <span id="numeroCommande" class="gras"></span> 
+                    d'un montant de 
+                    <span  id="montantCommande" class="gras"></span> <span class="gras">&euro;</span>
+                    a bien été validée. <br>Nous vous en remercions. A bientôt sur notre site!!!</p>
             </div>
         </div>
     </main>
@@ -66,6 +66,7 @@
             </div>
         </footer>
 
+        
     <script src="confirmation.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

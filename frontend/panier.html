@@ -93,37 +93,36 @@
         <div class="col">
         <!-- partie du formulaire -->
             <h2 class="center my-5">Formulaire de validation : </h2>
-                    <form action="#" method="POST" id="formulaire">
-                        <div class="mb-3">
+                    <form method="POST" id="formulaire">
+                        <div class="mb-3 form-group">
                             <label for="lastName" class="form-label"></label>
-                            <input type="text" name="lastName" placeholder="Nom" id="lastName" class="form-control" required="required">
-                        <!--  /^[a-zA-Z-\s]*$/   /^[a-zA-Z '.-]*$/-->
+                            <input type="text" name="lastName" placeholder="Nom" id="lastName" class="form-control validation" required="reduired">
+                            <p id="refus"></p>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 form-group">
                             <label for="firstName" class="form-label"></label>
-                            <input type="text" name="firstName" placeholder="Prénom" id="firstName" class="form-control" required="required">
+                            <input type="text" name="firstName" placeholder="Prénom" id="firstName" class="form-control validation" required="required">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 form-group">
                             <label for="address" class="form-label"></label>
-                            <input type="text" name="address" placeholder="Adresse" id="address" class="form-control" required="required">
+                            <input type="text" name="address" placeholder="Adresse" id="address" class="form-control validation" required="required">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 form-group">
                             <label for="code-postal" class="form-label"></label>
                             <input type="text" name="code-postal" placeholder="Code Postal" id="code-postal" class="form-control" required="required" pattern="^(?:(?:(?:0[1-9]|[1-8]\d|9[0-4])(?:\d{3})?)|97[1-8]|98[4-9]|‌​‌​2[abAB])$">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 form-group">
                             <label for="city" class="form-label"></label>
-                            <input type="text" name="city" placeholder="Ville" id="city" class="form-control" required="required">
+                            <input type="text" name="city" placeholder="Ville" id="city" class="form-control validation" required="required">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 form-group">
                             <label for="email" class="form-label"></label>
-                            <input type="email" name="email" placeholder="Adresse email" id="email" class="form-control" required="required">
-                            <!-- pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" -->
+                            <input type="email" name="email" placeholder="Adresse email" id="email" class="form-control validation" required="required">
                         </div>
                         <br>
                         <br>
                         <!-- validation du formulaire -->
-                        <div class="mb-3 center">
+                        <div class="mb-3 form-group center">
                             <button type="submit" class="btn btn-primary envoie-formulaire">Valider</button>
                         </div>
                     </form>
@@ -131,8 +130,9 @@
             </div>
         </div>
 
-
-        <div id="chou"></div>
+        <div id="confirmCommande">
+            <!-- partie js -->
+        </div>
 </main>
 
 

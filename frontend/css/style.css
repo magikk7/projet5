@@ -284,6 +284,10 @@ tbody#tbody-total {
     text-align: center;
 }
 
+.para-confirm{
+    padding: 50px;
+}
+
 footer {
     color: whitesmoke;
     margin: 0;

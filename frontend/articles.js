@@ -1,16 +1,14 @@
 //URL à récupérer
-const queryString_url_id = window.location.search;
-// console.log(queryString_url_id);
+const queryString_url_id = window.location.search;// console.log(queryString_url_id);
 
 // je recupere ID dans URL avec un constructeur
-const my_url = new URLSearchParams(queryString_url_id);//je crée une instance
-// console.log(my_url);
+//je crée une instance
+const my_url = new URLSearchParams(queryString_url_id);// console.log(my_url);
 
-const page = my_url.get("name");//methode GET pour URL
-//recup valeur
+const page = my_url.get("name");//methode GET pour URL//recup valeur
 
 
-    // appel AJAX - requête server
+    // appel AJAX - requête serveur
     let elementMeuble = document.getElementById('element-meuble');
     let requete = new XMLHttpRequest();
 
@@ -23,8 +21,7 @@ const page = my_url.get("name");//methode GET pour URL
             let prix = `${this.response.price}`;
             // console.log(prix);
 
-            let resultat = prix / 100;
-            // console.log(resultat);
+            let resultat = prix / 100;// console.log(resultat);
 
             // CHIFFRES => mettre un séparateur des milliers
             function numStr(a, b) {
@@ -50,8 +47,7 @@ const page = my_url.get("name");//methode GET pour URL
                 <h3 id="${this.response.imageUrl}" class="card-title">${this.response.name}</h3>
                 <div class="image-meuble">
                     <img src="${this.response.imageUrl}" class="card-img-top heightImg-p2" alt="${this.response.name}">
-                </div>    
-
+                </div>   
                 <div class="card-body--descriptif">
                     <div class="descriptif">
                         <p class="description">${this.response.description}</p>
@@ -80,8 +76,7 @@ const page = my_url.get("name");//methode GET pour URL
                     </div>
                 </div>
             </div>
-        </div>
-        `
+        </div>`
     ;
 
         // OPTION VERNIS => boucle do while - pour lister les choix d'options couleurs vernis
@@ -113,24 +108,10 @@ const page = my_url.get("name");//methode GET pour URL
             };
             // console.log(choixMeuble);
 
-            ///////////compteur au click = qui vaut quantite meuble
+            ///////////compteur au click == qui vaut quantite meuble
             let counter = document.querySelector('.counter');
             counter.value = parseInt(counter.value) + 1;
             // counter.value = localStorage.length;
-            
-    
-             // compteur pour avoir la quantité cliqué dans le PANIER
-            // function ajoutPanier(){
-            //     let idPanier = document.getElementById('panier');
-            //     let compteur = localStorage.getItem('ajoutPanier');
-
-            //     compteur++;
-
-            //     localStorage.setItem('ajoutPanier', compteur);
-            //     idPanier.innerHTML = `${compteur}`;
-            // };
-
-
             
 
             let infoLocalStorage = JSON.parse(localStorage.getItem(choixMeuble._id));//valeur "dynamique" => représentée par ID
@@ -140,7 +121,7 @@ const page = my_url.get("name");//methode GET pour URL
                 infoLocalStorage.push(choixMeuble);
                 localStorage.setItem(choixMeuble._id, JSON.stringify(infoLocalStorage));//valeur "dynamique" => représentée par ID
                 
-                alert("Un produit est ajouté au panier");//verbose...
+                alert("Un produit est ajouté au panier");
             };
 
             if(infoLocalStorage){
@@ -152,7 +133,7 @@ const page = my_url.get("name");//methode GET pour URL
             localstorage();
             };
 
-        }, false);//ne fait pas "sauter" la page        
+        }, false);      
             
         } else if (this.readyState == 4 && this.status == 404) {
             alert('Erreur 404 : Une erreur s\'est produite. La page est introuvable.');

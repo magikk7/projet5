@@ -6,7 +6,7 @@ main()
             displayProduit(produit)
         };
     };
-
+//récuparer les produits
     async function getProduits(){
         try {
             const response = await fetch("http://localhost:3000/api/furniture");
@@ -20,11 +20,9 @@ main()
     
     function displayProduit(produit){
         
-        let prix = `${produit.price}`;
-        // console.log(prix);
+        let prix = `${produit.price}`;// console.log(prix);
 
-        let resultat = prix / 100;
-        // console.log(resultat);
+        let resultat = prix / 100;// console.log(resultat);
 
         // CHIFFRES => mettre un séparateur des milliers
         function numStr(a, b) {
@@ -43,7 +41,7 @@ main()
         };
     
 
-        //injecter HTML
+        //partie HTML injectée
         document.getElementById("produits").innerHTML += 
         `
         <div id="selection-produit" class="card">

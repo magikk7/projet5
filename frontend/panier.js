@@ -1,3 +1,4 @@
+//création tableau qui représente le panier
 let infoQuantiteTableau = parseInt(document.getElementById('info-quantite-tableau'));//pour panier vide
 let tbodyPanier = document.getElementById('tbody-panier');      
 
@@ -20,7 +21,7 @@ let tbodyPanier = document.getElementById('tbody-panier');
             </td>
             <td class="donnees-tableau prix-unique-produit right">${selectionMeublePanier[0].price} &euro;</td>
             <td class="donnees-tableau sous-total-produit right"></td>
-            <td><button class="donnees-tableau btn-supprimer">Supprimer</button><td>
+            <td><button id="bouton" class="donnees-tableau btn-supprimer">Supprimer</button><td>
         </tr>
         `;
     };
@@ -39,12 +40,9 @@ let tbodyPanier = document.getElementById('tbody-panier');
 
                     btnSupprimer[i].addEventListener('click', function(event){
                         // console.log(event);
-                        event.preventDefault();
+                        event.preventDefault();   
     
-                        // console.log(key)
-                        // console.log(localStorage.removeItem(key));//undefined
-    
-                        //la row des produits //5 rows maxi 
+                        //la row des produits //5 rows maxi == 5 produits
                         event.target.parentElement.parentElement.remove();
     
                         //suppression dans le localstorage
@@ -65,7 +63,7 @@ let tbodyPanier = document.getElementById('tbody-panier');
 
         ////////////////////// tout supprimer/////////////////
         let supprimerPanier = document.getElementById('supprimer-panier')//;console.log(supprimerPanier);
-        // tbody-panier
+
         let leParentPourTableau = document.getElementById('tbody-panier');// console.log(leParentPourTableau);//ok
 
         // let totalPanier = document.getElementById('prix-tout-total');// console.log(totalPanier);
@@ -82,7 +80,6 @@ let tbodyPanier = document.getElementById('tbody-panier');
 
                 //suppression du localstorage
                 localStorage.clear();
-                // console.log(Storage.clear());
 
                 totalPanier.innerHTML = `0 &euro;`;
                 });
@@ -90,14 +87,14 @@ let tbodyPanier = document.getElementById('tbody-panier');
         };
         toutSupprimer();
 
-////////////////////// multiplier par rows dans table html    //recuperer VALEUR PAR LIGNE/////////////////
+///////////////////////recuperer VALEUR PAR LIGNE/////////////////
 
-    let parentPourTableau = document.getElementById('tbody-panier').children;//ok // console.log(parentPourTableau);
+    let parentPourTableau = document.getElementById('tbody-panier').children;// console.log(parentPourTableau);
     // console.log(parentPourTableau);//ok
 
 //PARENT
     for(i=0; i<parentPourTableau.length;i++){
-        // console.log(parentPourTableau[i]);//ok//LIGNE PRODUIT => TR
+        // console.log(parentPourTableau[i]);//LIGNE PRODUIT => TR
 
         //ici je calcule chaque ligne
         //ROW => PREND TOUS LES TD HORIZONTAUX
@@ -106,25 +103,25 @@ let tbodyPanier = document.getElementById('tbody-panier');
 
 //QUANTITE
         let quantiteP = enfant[1].children[0];
-        // console.log(quantiteP); //input uniquement // value a voir après
+        // console.log(quantiteP); //input uniquement
 
         let key = localStorage.key(i);
         let stockage = JSON.parse(localStorage.getItem(key));
-        // console.log(stockage.length);//ok
+        // console.log(stockage.length);
 
         quantiteP.value = stockage.length;
-        let quantiteProduitParLigne = quantiteP.value;/////
+        let quantiteProduitParLigne = quantiteP.value;
                 
 
 //PRIX
         let coutP = enfant[2];//toute la balise TD PRIX
-        let chiffreCoutP = parseInt(coutP.innerHTML);/////
-        // console.log(chiffreCoutP);//ok//number//
+        let chiffreCoutP = parseInt(coutP.innerHTML);
+        // console.log(chiffreCoutP);//number//
         
         
 //SOUS TOTAL HORIZONTAL 
-        let sousTotalP = enfant[3];/////
-        // console.log(sousTotalP);//ok//TD SOUS TOTAL 
+        let sousTotalP = enfant[3];
+        // console.log(sousTotalP);//TD SOUS TOTAL 
 
 
         function multiplication(){
@@ -139,7 +136,6 @@ let tbodyPanier = document.getElementById('tbody-panier');
     ////////////////////////////////////TOTAL => CALCUL VERTICAL////////////////////////////////////////////
 
         // let totalPanier = document.getElementById('prix-tout-total');
-        // console.log(totalPanier);
         let ensembleSousTotal = document.getElementsByClassName('sous-total-produit');
         // console.log(ensembleSousTotal);//string
         
@@ -170,64 +166,97 @@ let tbodyPanier = document.getElementById('tbody-panier');
         };
         sommeDuPanier();
     };
+        
+
+            /////////////////////////formulaire a envoyer au serveur//////////////////////////////////
+    let formulaire = document.getElementById('formulaire');// console.log(formulaire);
+    let totalPanier = document.getElementById('prix-tout-total');// console.log(totalPanier);
+    let sommePanier = parseInt(totalPanier.innerHTML);// console.log(sommePanier);
+
+    /////////////////////////////////valider les champs///////////////////
+
+    ////valider lastname
+    formulaire.lastName.addEventListener('change', function(){
+        validEmail(this);
+    });
+
+    const validEmail = function(inputLastName){
+        let lastNameRegex = new RegExp('^[A-Z][A-Za-z\é\è\ê\-]{2,30}$');        
+
+    let testLastName = lastNameRegex.test(inputLastName.value);
+        let refus = inputLastName.nextElementSibling;
+    // console.log(testLastName
+    if(testLastName){
+    refus.innerHTML = "Nom de famille valide";
+    }else{
+    refus.innerHTML = "Nom de famille non validée";
+    };
+
     
+    // si panier vide => VALIDATION formulaire pas possible
+    // function accepterFormulaire(){
+        if(localStorage.length > 0){
+    
+    
+            ////le localstorage == panier enregistré
+            let product_id = [];
 
-        /////////////////////////formulaire a envoyer au serveur//////////////////////////////////
-let formulaire = document.getElementById('formulaire');// console.log(formulaire);
-// let envoieFormulaire = document.getElementById('envoie-formulaire');//console.log(envoieFormulaire);
+            for(i=0; i<localStorage.length; i++) {
+                var key = localStorage.key(i);
+                var value = localStorage[key];
+            };
 
-let totalPanier = document.getElementById('prix-tout-total');
-// console.log(totalPanier);//ok
+            formulaire.addEventListener('submit', function(event){
+            // console.log(event); 
+            event.preventDefault();
 
-let sommePanier = parseInt(totalPanier.innerHTML);
-// console.log(sommePanier);//ok
+            let contact = {
+                lastName: document.getElementById('lastName').value,
+                firstName: document.getElementById('firstName').value,
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                email: document.getElementById('email').value
+            };
 
-////le localstorage == panier enregistré
-let product_id = [];
-let value_product = [];
-//
-for(i=0; i<localStorage.length; i++) {
-    var key = localStorage.key(i);
-    var value = localStorage[key];
-    // console.log(key + " => " + value);
+            let data = {
+                contact,
+                products: product_id
+            };
+            // console.log(data);
 
-    // product_id.push(key);console.log(product_id.push(key))//reponse 2
 
-    value_product.push(value)
-    // console.log(value_product)//localStorage Categorie de meubles
-};
 
-formulaire.addEventListener('submit', function(event){
-// console.log(event);
-event.preventDefault();
+            //method POST
+            fetch("http://localhost:3000/api/furniture/order",
+            {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify(data)
+            })
+            .then(function(res){ return res.json();}
 
-let data = {
-    contact:{
-        lastName: document.getElementById('lastName').value,
-        firstName: document.getElementById('firstName').value,
-        address: document.getElementById('address').value,
-        city: document.getElementById('city').value,
-        email: document.getElementById('email').value
-    },
-    products: product_id
-};
-// console.log(data);
+            )
+            .then(function(data){ 
+                console.log( JSON.stringify(data),
+                //recup de l'id de commande
+                console.log('Votre id est : ' + Object.values(data)[2]));
+                console.log(totalPanier.innerHTML);//ok
 
-fetch("http://localhost:3000/api/furniture/order",
-{
-    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    },
-    method: "POST",
-    body: JSON.stringify(data)
-})
-.then(function(res){ return res.json();}
+                let confirmCommande = document.getElementById('confirmCommande');
+                confirmCommande.innerHTML =
+                `<div class="row">
+                    <div class="col alert alert-success" role="alert">
+                    Nous vous confirmons que votre commande n°${Object.values(data)[2]} d'un montant de ${totalPanier.innerHTML} a bien été validée.<br>Nous vous en remercions. A bientôt sur notre site.
+                    </div>
+                </div>`
 
-)
-.then(function(data){ 
-    alert( JSON.stringify( data ),
-    //recup de l'id
-    console.log('Votre id est : ' + Object.values(data)[2]))
-});
-});
+                // suppression localstorage après confirmation
+                localStorage.clear();
+            });
+            });
+}}
+    //  }
+// accepterFormulaire();
