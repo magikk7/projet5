@@ -2,7 +2,6 @@
 let infoQuantiteTableau = parseInt(document.getElementById('info-quantite-tableau'));//pour panier vide
 let tbodyPanier = document.getElementById('tbody-panier');      
 
-
     if(localStorage == null || localStorage == 0){
         infoQuantiteTableau.innerHTML = 'Votre panier est vide';
     } else {
@@ -11,22 +10,21 @@ let tbodyPanier = document.getElementById('tbody-panier');
         var key = localStorage.key(i);//console.log(key);
         var selectionMeublePanier = JSON.parse(localStorage.getItem(key));//console.log(selectionMeublePanier);
 
-
         //partie HTML - visible sur le site avec la boucle for - informations et quantités repris du localstorage en cours
         tbodyPanier.innerHTML += `
         <tr class="ligne-produit" id="${key}">
             <td class="donnees-tableau center">${selectionMeublePanier[0].name}</td>
-            <td class="donnees-tableau quantite center">
-                <input type="text" class="quantite-produit-select center">
+            <td class="donnees-tableau quantite-produit-select center">
+                
             </td>
-            <td class="donnees-tableau prix-unique-produit right">${selectionMeublePanier[0].price} &euro;</td>
+            <td class="donnees-tableau prix-unique-produit right">${selectionMeublePanier[0].price/100} &euro;</td>
             <td class="donnees-tableau sous-total-produit right"></td>
             <td><button id="bouton" class="donnees-tableau btn-supprimer">Supprimer</button><td>
         </tr>
         `;
     };
 
-
+//<input type="text" class="quantite-produit-select center"></input>
 ////////////////////////////////////SUPPRIMER LIGNE DU PANIER////////////////////////////////////////////
 
         let btnSupprimer = document.getElementsByClassName('btn-supprimer');
@@ -102,15 +100,15 @@ let tbodyPanier = document.getElementById('tbody-panier');
 
 
 //QUANTITE
-        let quantiteP = enfant[1].children[0];
-        // console.log(quantiteP); //input uniquement
+        let quantiteP = enfant[1];
+        // console.log(quantiteP);
 
         let key = localStorage.key(i);
         let stockage = JSON.parse(localStorage.getItem(key));
         // console.log(stockage.length);
 
-        quantiteP.value = stockage.length;
-        let quantiteProduitParLigne = quantiteP.value;
+        quantiteP.innerHTML = stockage.length;
+        let quantiteProduitParLigne = quantiteP.innerHTML;
                 
 
 //PRIX
@@ -355,8 +353,7 @@ let tbodyPanier = document.getElementById('tbody-panier');
 
                  // si panier vide => VALIDATION formulaire pas possible
             // let envoieFormulaire = document.getElementById('envoie-formulaire');//console.log(envoieFormulaire.disabled);
-            envoieFormulaire.addEventListener('click', function(e){
-                e.preventDefault;
+            envoieFormulaire.addEventListener('click', function(){
                 envoieFormulaire.disabled = true;
             });
 
