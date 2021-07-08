@@ -166,14 +166,22 @@ let tbodyPanier = document.getElementById('tbody-panier');
         };
         sommeDuPanier();
     };
-        
 
-            /////////////////////////formulaire a envoyer au serveur//////////////////////////////////
+
+    /////////////////////////formulaire a envoyer au serveur//////////////////////////////////
     let formulaire = document.getElementById('formulaire');// console.log(formulaire);
     let totalPanier = document.getElementById('prix-tout-total');// console.log(totalPanier);
     let sommePanier = parseInt(totalPanier.innerHTML);// console.log(sommePanier);
 
-    /////////////////////////////////valider les champs///////////////////
+    
+    // si panier vide => VALIDATION formulaire pas possible
+    let envoieFormulaire = document.getElementById('envoie-formulaire');//console.log(envoieFormulaire.disabled);
+    if(sommePanier > 1 ){
+        envoieFormulaire.disabled = false;
+    };
+
+
+    /////////////////////////////////valider tous les champs du formulaire avant envoie au server///////////////////
 
     ////valider lastname
     formulaire.lastName.addEventListener('change', function(){
@@ -183,13 +191,14 @@ let tbodyPanier = document.getElementById('tbody-panier');
     const validLastName = function(inputLastName){
         let lastNameRegex = new RegExp('^[A-Z][A-Za-z\é\è\ê\-]{2,30}$');        
 
-    let testLastName = lastNameRegex.test(inputLastName.value);
-        let refus = inputLastName.nextElementSibling;
-    // console.log(testLastName
-    if(testLastName){
-    refus.innerHTML = "Nom de famille valide";
-    }else{
-    refus.innerHTML = "Nom de famille non validée";
+        let testLastName = lastNameRegex.test(inputLastName.value);
+            let refus = inputLastName.nextElementSibling;
+        // console.log(testLastName);
+        if(testLastName){
+        refus.innerHTML = "Nom de famille valide";
+        }else{
+        refus.innerHTML = "Nom de famille non valide";
+        };
     };
 
 
@@ -201,13 +210,14 @@ let tbodyPanier = document.getElementById('tbody-panier');
     const validFirstName = function(inputFirstName){
         let firstNameRegex = new RegExp('^[A-Z][A-Za-z\é\è\ê\-]{2,30}$');        
 
-    let testFirstName = firstNameRegex.test(inputFirstName.value);
-        let refus = inputFirstName.nextElementSibling;
-    // console.log(testLastName
-    if(testFirstName){
-    refus.innerHTML = "Prénom valide";
-    }else{
-    refus.innerHTML = "Prénom non validé";
+        let testFirstName = firstNameRegex.test(inputFirstName.value);
+            let refus = inputFirstName.nextElementSibling;
+        // console.log(testLastName);
+        if(testFirstName){
+        refus.innerHTML = "Prénom valide";
+        }else{
+        refus.innerHTML = "Prénom non valide";
+        };
     };
 
     ////valider city
@@ -216,15 +226,16 @@ let tbodyPanier = document.getElementById('tbody-panier');
     });
 
     const validCity = function(inputCity){
-        let cityRegex = new RegExp('^\p{Lu}\p{L}*(?:[\s-]\p{Lu}\p{L}*)*$');        
-        // ^\p{Lu}\p{L}*(?:[\s-]\p{Lu}\p{L}*)*$ 
-    let testCity = cityRegex.test(inputCity.value);
-        let refus = inputCity.nextElementSibling;
-    // console.log(testCity)
-    if(testCity){
-    refus.innerHTML = "Ville valide";
-    }else{
-    refus.innerHTML = "Ville non valide";
+        let cityRegex = new RegExp('^[A-Z][A-Za-z\é\è\ê\-]{2,30}$');              
+
+        let testCity = cityRegex.test(inputCity.value);
+            let refus = inputCity.nextElementSibling;
+        // console.log(testCity);
+        if(testCity){
+        refus.innerHTML = "Ville valide";
+        }else{
+        refus.innerHTML = "Ville non valide";
+        };
     };
 
 
@@ -234,41 +245,61 @@ let tbodyPanier = document.getElementById('tbody-panier');
     });
 
     const validAddress = function(inputAddress){
-        let addressRegex = new RegExp('');
-        
+        let addressRegex = new RegExp('^([0-9a-zA-Z,\. ]*)$');
+
+
         let testAddress = addressRegex.test(inputAddress.value);
             let refus = inputAddress.nextElementSibling;
         // console.log(testAddress)
         if(testAddress){
         refus.innerHTML = "Addresse valide";
         }else{
-        refus.innerHTML = "Addresse non validée";
+        refus.innerHTML = "Addresse non valide";
         };
+    };
 
-        ////valider email///////////////////////////////////////////////////////////////////
+    ////valider code postal
+    formulaire.codePostal.addEventListener('change', function(){
+        validCodePostal(this);
+    });
+
+    const validCodePostal = function(inputCodePostal){
+        let codePostalRegex = new RegExp('^(([1-95]{2}|2A|2B)[0-9]{3})$|^[971-974]$');
+
+
+        let testCodePostal = codePostalRegex.test(inputCodePostal.value);
+            let refus = inputCodePostal.nextElementSibling;
+        // console.log(testAddress);
+        if(testCodePostal){
+        refus.innerHTML = "Code Postal valide";
+        }else{
+        refus.innerHTML = "Code Postal non valide";
+        };
+    };
+
+
+        ////valider email//////
     formulaire.email.addEventListener('change', function(){
         validEmail(this);
     });
 
     const validEmail = function(inputEmail){
         let emailRegex = new RegExp('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$');
-        
+
         let testEmail = emailRegex.test(inputEmail.value);
             let refus = inputEmail.nextElementSibling;
-        // console.log(testEmail)
+        // console.log(testEmail);
         if(testEmail){
         refus.innerHTML = "Addresse Email valide";
         }else{
         refus.innerHTML = "Addresse Email valide";
         };
+    };
+    
 
-    
-    // si panier vide => VALIDATION formulaire pas possible
-    // function accepterFormulaire(){
-        if(localStorage.length > 0){
-    
-    
-            ////le localstorage == panier enregistré
+///////////////////Pour envoie au serveur
+
+            ////le localstorage équivaut au panier enregistré
             let product_id = [];
 
             for(i=0; i<localStorage.length; i++) {
@@ -306,12 +337,11 @@ let tbodyPanier = document.getElementById('tbody-panier');
                 method: "POST",
                 body: JSON.stringify(data)
             })
-            .then(function(res){ return res.json();}
-
-            )
+            .then(function(res){ return res.json();
+            })
             .then(function(data){ 
                 console.log( JSON.stringify(data),
-                //recup de l'id de commande
+                //recup de l'id de commande / par un tableau
                 console.log('Votre id est : ' + Object.values(data)[2]));
                 console.log(totalPanier.innerHTML);//ok
 
@@ -323,13 +353,15 @@ let tbodyPanier = document.getElementById('tbody-panier');
                     </div>
                 </div>`;
 
-                // suppression localstorage après confirmation
+                 // si panier vide => VALIDATION formulaire pas possible
+            // let envoieFormulaire = document.getElementById('envoie-formulaire');//console.log(envoieFormulaire.disabled);
+            envoieFormulaire.addEventListener('click', function(e){
+                e.preventDefault;
+                envoieFormulaire.disabled = true;
+            });
+
+
+                // suppression localstorage après confirmation de la commande
                 localStorage.clear();
             });
             });
-        }};
-    };
-};
-};
-};
-// accepterFormulaire();
