@@ -21,7 +21,6 @@ main()
     function displayProduit(produit){
         
         let prix = `${produit.price}`;// console.log(prix);
-
         let resultat = prix / 100;// console.log(resultat);
 
         // CHIFFRES => mettre un séparateur des milliers

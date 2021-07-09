@@ -14,9 +14,7 @@ let tbodyPanier = document.getElementById('tbody-panier');
         tbodyPanier.innerHTML += `
         <tr class="ligne-produit" id="${key}">
             <td class="donnees-tableau center">${selectionMeublePanier[0].name}</td>
-            <td class="donnees-tableau quantite-produit-select center">
-                
-            </td>
+            <td class="donnees-tableau quantite-produit-select center"></td>
             <td class="donnees-tableau prix-unique-produit right">${selectionMeublePanier[0].price/100} &euro;</td>
             <td class="donnees-tableau sous-total-produit right"></td>
             <td><button id="bouton" class="donnees-tableau btn-supprimer">Supprimer</button><td>
@@ -24,11 +22,9 @@ let tbodyPanier = document.getElementById('tbody-panier');
         `;
     };
 
-//<input type="text" class="quantite-produit-select center"></input>
 ////////////////////////////////////SUPPRIMER LIGNE DU PANIER////////////////////////////////////////////
 
-        let btnSupprimer = document.getElementsByClassName('btn-supprimer');
-          // console.log(btnSupprimer);
+        let btnSupprimer = document.getElementsByClassName('btn-supprimer');// console.log(btnSupprimer);
         let totalPanier = document.getElementById('prix-tout-total');// console.log(totalPanier);
 
         function supprimer(){
@@ -61,9 +57,7 @@ let tbodyPanier = document.getElementById('tbody-panier');
 
         ////////////////////// tout supprimer/////////////////
         let supprimerPanier = document.getElementById('supprimer-panier');//;console.log(supprimerPanier);
-
         let leParentPourTableau = document.getElementById('tbody-panier');// console.log(leParentPourTableau);//ok
-
         // let totalPanier = document.getElementById('prix-tout-total');// console.log(totalPanier);
                 
         function toutSupprimer(){
@@ -338,7 +332,7 @@ let tbodyPanier = document.getElementById('tbody-panier');
             .then(function(res){ return res.json();
             })
             .then(function(data){ 
-                console.log( JSON.stringify(data),
+                console.log(JSON.stringify(data),
                 //recup de l'id de commande / par un tableau
                 console.log('Votre id est : ' + Object.values(data)[2]));
                 console.log(totalPanier.innerHTML);//ok
@@ -351,9 +345,9 @@ let tbodyPanier = document.getElementById('tbody-panier');
                     </div>
                 </div>`;
 
-                 // si panier vide => VALIDATION formulaire pas possible
-            // let envoieFormulaire = document.getElementById('envoie-formulaire');//console.log(envoieFormulaire.disabled);
-            envoieFormulaire.addEventListener('click', function(){
+                // si panier vide => VALIDATION formulaire pas possible
+                // let envoieFormulaire = document.getElementById('envoie-formulaire');//console.log(envoieFormulaire.disabled);
+                envoieFormulaire.addEventListener('click', function(){
                 envoieFormulaire.disabled = true;
             });
 
