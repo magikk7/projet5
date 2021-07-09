@@ -349,10 +349,17 @@ let tbodyPanier = document.getElementById('tbody-panier');
                 // let envoieFormulaire = document.getElementById('envoie-formulaire');//console.log(envoieFormulaire.disabled);
                 envoieFormulaire.addEventListener('click', function(){
                 envoieFormulaire.disabled = true;
+                
+                     //rechargement page
+                     window.location.href = 'panier.html';
+
+                 // suppression localstorage après confirmation de la commande
+                 localStorage.clear();
+
             });
 
 
-                // suppression localstorage après confirmation de la commande
-                localStorage.clear();
+                // // suppression localstorage après confirmation de la commande
+                // localStorage.clear();
             });
             });
