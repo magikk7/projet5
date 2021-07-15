@@ -21,23 +21,8 @@ const page = my_url.get("name");//methode GET pour URL//recup valeur
             let prix = `${this.response.price}`;
             // console.log(prix);
 
+            //pour function numStr()
             let resultat = prix / 100;// console.log(resultat);
-
-            // CHIFFRES => mettre un séparateur des milliers
-            function numStr(a, b) {
-                a = '' + a;
-                b = b || ' ';
-                var c = '',
-                    d = 0;
-                while (a.match(/^0[0-9]/)) {
-                    a = a.substr(1);
-                }
-                for (var i = a.length-1; i >= 0; i--) {
-                    c = (d != 0 && d % 3 == 0) ? a[i] + b + c : a[i] + c;
-                    d++;
-                }
-                return c;
-            };
 
             //partie HTML
     elementMeuble.innerHTML = 
@@ -93,13 +78,13 @@ const page = my_url.get("name");//methode GET pour URL//recup valeur
         while (i < this.response.varnish.length);
 
 
-        //Incrémenter PANIER dans nav + en local storage / Aller au PANIER
+//Incrémenter PANIER dans nav + en sessionStorage / Aller au PANIER
         let idBouton = document.getElementById('bouton_validation');
     
         idBouton.addEventListener('click', (event) => {
             event.preventDefault();
 
-            //récup les données pour le local storage avec cette variable
+            //récup les données pour le sessionStorage avec cette variable
             const choixMeuble = {
                 _id: `${this.response._id}`,
                 name: `${this.response.name}`,
@@ -108,29 +93,29 @@ const page = my_url.get("name");//methode GET pour URL//recup valeur
             };
             // console.log(choixMeuble);
 
-            ///////////compteur au click == qui vaut quantite meuble
+///////////compteur au click == qui vaut quantite meuble
             let counter = document.querySelector('.counter');
             counter.value = parseInt(counter.value) + 1;
-            // counter.value = localStorage.length;
+            // counter.value = sessionStorage.length;
             
 
-            let infoLocalStorage = JSON.parse(localStorage.getItem(choixMeuble._id));//valeur "dynamique" => représentée par ID
+            let infoSessionStorage = JSON.parse(sessionStorage.getItem(choixMeuble._id));//valeur "dynamique" => représentée par ID
+//function
+            const sessionstorage = function(){
 
-            const localstorage = function(){
-
-                infoLocalStorage.push(choixMeuble);
-                localStorage.setItem(choixMeuble._id, JSON.stringify(infoLocalStorage));//valeur "dynamique" => représentée par ID
+                infoSessionStorage.push(choixMeuble);
+                sessionStorage.setItem(choixMeuble._id, JSON.stringify(infoSessionStorage));//valeur "dynamique" => représentée par ID
                 
                 alert("Un produit est ajouté au panier");
             };
 
-            if(infoLocalStorage){
-            localstorage();
+            if(infoSessionStorage){
+            sessionstorage();
                 
-            //ajoute les caracteristiques du meuble dans le local storage
+            //ajoute les caracteristiques du meuble dans le sessionStorage
             } else {
-            infoLocalStorage = [];
-            localstorage();
+            infoSessionStorage = [];
+            sessionstorage();
             };
 
         }, false);      

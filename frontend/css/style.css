@@ -28,6 +28,18 @@ html, body {
     border-radius: 10px;
 }
 
+.flexbox{
+    display: flex;
+}
+
+.flex1 {
+    flex: 1;
+}
+
+.flex2 {
+    flex: 1;
+}
+
 .accueil {
     color: black;
 }
@@ -82,17 +94,11 @@ h3 {
     color: whitesmoke;
 }
 
-main {
-    min-height: 150vh;
-}
-
 .main-meuble {
     display: flex;
     justify-content: center;
     align-items: center;
-    
     margin: 100px 0;
-    /* height: 250px; */
 }
 
 #element-meuble {
@@ -233,12 +239,16 @@ form {
     background-image: linear-gradient(90deg,rgb(102, 51, 0), rgb(153, 102, 0));
 }
 
+.table {
+    min-height : 100px;
+}
+
 .tableau {
     border-collapse: collapse;
     min-width: 400px;
     width: auto;
     cursor: pointer;
-    margin: 100px auto;
+    margin: 40px auto;
     border: 1px solid gray;
     box-shadow: 1px 1px 6px #555;
 }
@@ -278,6 +288,43 @@ tbody#tbody-total {
 
 .gras {
     font-weight: bold;
+}
+
+.newButton {
+    border-radius : 15px;
+}
+
+.chevron {
+    height: 18px;
+    background-color: whitesmoke;
+    padding: 2px;
+    margin: 5px;
+    border-radius: 3px;
+}
+
+.allerFormulaire, .allerPageAccueil {
+    visibility: hidden;
+    border-radius: 10px;
+    background-color: #20ac6b
+}
+
+.container-formulaire, #supprimer-panier {
+    visibility: hidden;
+}
+
+.supprimer-panier {
+    border: solid 1px black;
+    border-radius: 10px;
+}
+
+.refus {
+    color: rgb(0, 204, 102);
+}
+
+.bouton-dim {
+    height: 50px;
+    width: 500px;
+    margin: 5px 0;
 }
 
 .panier-vide {
