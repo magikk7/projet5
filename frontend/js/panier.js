@@ -393,12 +393,19 @@ formulaire.addEventListener("submit", function (event) {
       return res.json();
     })
     .then(function (data) {
+      
+      //id de commande dans le localstorage
+      localStorage.setItem('responseId', JSON.stringify(Object.values(data)[2]));
+      //total commandé dans le localStorage
+      localStorage.setItem('totalCommande', JSON.stringify(totalPanier.innerHTML));
+
       console.log(
         JSON.stringify(data),
         //recup de l'id de commande / par un tableau
         console.log("Votre id est : " + Object.values(data)[2])
       );
       console.log(totalPanier.innerHTML); //ok
+
 
       let confirmCommande = document.getElementById("confirmCommande");
       confirmCommande.innerHTML = `<div class="row">
@@ -411,16 +418,18 @@ formulaire.addEventListener("submit", function (event) {
                     </div>
                 </div>`;
 
-      // si panier vide => VALIDATION formulaire pas possible
-      // let envoieFormulaire = document.getElementById('envoie-formulaire');//console.log(envoieFormulaire.disabled);
-      envoieFormulaire.addEventListener("click", function () {
-        envoieFormulaire.disabled = true;
+      document.location.href = "confirmation.html";
 
-        //rechargement page
-        window.location.href = "panier.html";
+      // // si panier vide => VALIDATION formulaire pas possible
+      // // let envoieFormulaire = document.getElementById('envoie-formulaire');//console.log(envoieFormulaire.disabled);
+      // envoieFormulaire.addEventListener("click", function () {
+      //   envoieFormulaire.disabled = true;
 
-        //suppression sessionstorage après confirmation de la commande
-        sessionStorage.clear();
-      });
+      //   //rechargement page
+      //   window.location.href = "panier.html";
+
+      //   //suppression sessionstorage après confirmation de la commande
+      //   sessionStorage.clear();
+      // });
     });
 });
