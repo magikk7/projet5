@@ -1,17 +1,14 @@
 //id de commande dans le localstorage
-const idCommande = localStorage.getItem('responseId');
+const idCommande = sessionStorage.getItem('responseId');
 //total commandé dans le localStorage
-const panierCommande = localStorage.getItem('totalCommande');
+const panierCommande = sessionStorage.getItem('totalCommande');
 
 
 //AFFICHER LES INFORMATIONS SUR LA PAGE
-// let confirmationCommande = document.getElementById('confirmation-commande'); console.log(confirmationCommande);
-let numeroCommande = document.getElementById('numero-commande');
-// console.log(numeroCommande);
+let numeroCommande = document.getElementById('numero-commande');// console.log(numeroCommande);
+let montantCommande = document.getElementById('montant-commande');// console.log(montantCommande);
 
-let montantCommande = document.getElementById('montant-commande');
-// console.log(montantCommande);
-
-//informations en dynamique dans balises HTML
+//informations en dynamique dans les balises HTML
 numeroCommande.innerHTML = idCommande;
 montantCommande.innerHTML = panierCommande;  
+

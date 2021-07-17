@@ -11,25 +11,26 @@ if (sessionStorage == null || sessionStorage == 0) {
     var key = sessionStorage.key(i); //console.log(key);
     var selectionMeublePanier = JSON.parse(sessionStorage.getItem(key)); //console.log(selectionMeublePanier);
 
-    //partie HTML - visible sur le site avec la boucle for - informations et quantités repris du sessionstorage en cours
+    if(key.length === 24 && key.length !== 36) {
+      //partie HTML - visible sur le site avec la boucle for - informations et quantités repris du sessionstorage en cours
     tbodyPanier.innerHTML += `
-        <tr class="ligne-produit" id="${key}">
-            <td class="donnees-tableau center">${
-              selectionMeublePanier[0].name
-            }</td>
-            <td class="donnees-tableau quantite-produit-select center"></td>
-            <td class="donnees-tableau prix-unique-produit right">${
-              selectionMeublePanier[0].price / 100
-            } &euro;</td>
-            
-            <td class="donnees-tableau sous-total-produit right"></td>
-            <td><button id="bouton" class="donnees-tableau btn-supprimer">Supprimer</button><td>
-        </tr>
-        `;
-  }
+    <tr class="ligne-produit" id="${key}">
+        <td class="donnees-tableau center">${
+          selectionMeublePanier[0].name
+        }</td>
+        <td class="donnees-tableau quantite-produit-select center"></td>
+        <td class="donnees-tableau prix-unique-produit right">${
+          selectionMeublePanier[0].price / 100
+        } &euro;</td>
+        
+        <td class="donnees-tableau sous-total-produit right"></td>
+        <td><button id="bouton" class="donnees-tableau btn-supprimer">Supprimer</button><td>
+    </tr>
+    `;
+    };
+  };
 
   ////////////////////////////////////SUPPRIMER LIGNE DU PANIER////////////////////////////////////////////
-  // ${numStr(resultat
   let btnSupprimer = document.getElementsByClassName("btn-supprimer"); // console.log(btnSupprimer);
   let totalPanier = document.getElementById("prix-tout-total"); // console.log(totalPanier);
 
@@ -58,30 +59,7 @@ if (sessionStorage == null || sessionStorage == 0) {
   }
   supprimer();
 
-  ////////////////////// tout supprimer/////////////////
-  let supprimerPanier = document.getElementById("supprimer-panier"); //console.log(supprimerPanier);
-  let leParentPourTableau = document.getElementById("tbody-panier"); // console.log(leParentPourTableau);//ok
-  // let totalPanier = document.getElementById('prix-tout-total');// console.log(totalPanier);
-
-  function toutSupprimer() {
-    if (sessionStorage.length > 0) {
-      supprimerPanier.addEventListener("click", function (event) {
-        //console.log(event);
-        event.preventDefault;
-
-        //je selectionne tout le tableau à supprimer
-        leParentPourTableau.remove();
-
-        //suppression du sesionstorage
-        sessionStorage.clear();
-
-        totalPanier.innerHTML = `0 &euro;`;
-
-          //rechargement page
-        location.reload();
-      });
-    }
-  }
+  ////////////////////// tout supprimer//////////cf fichier utils.js
   toutSupprimer();
 
   ///////////////////////recuperer VALEUR PAR LIGNE/////////////////
@@ -101,7 +79,9 @@ if (sessionStorage == null || sessionStorage == 0) {
     let quantiteP = enfant[1];
     // console.log(quantiteP);
 
-    let key = sessionStorage.key(i);
+    if(key.length === 24) {
+      sessionStorage.key(i);
+    };
     let stockage = JSON.parse(sessionStorage.getItem(key));
     // console.log(stockage.length);
 
@@ -213,15 +193,8 @@ let inputCity = document.getElementById("city");
 let inputEmail = document.getElementById("email");
 
 
-// si panier vide => VALIDATION formulaire pas possible
-let envoieFormulaire = document.getElementById("envoie-formulaire"); //console.log(envoieFormulaire.disabled);
-if (sommePanier > 1) {
-  envoieFormulaire.disabled = false;
-}
-
 /////////////////////////////////valider tous les champs du formulaire avant envoie au server///////////////////
-
-////valider lastname
+  ////valider lastname
 formulaire.lastName.addEventListener("change", function () {
   validLastName(this);
 });
@@ -352,6 +325,10 @@ const validEmail = function (inputEmail) {
   };
 };
 
+// si panier vide => VALIDATION formulaire pas possible////////////////////////////question
+let envoieFormulaire = document.getElementById("envoie-formulaire"); //console.log(envoieFormulaire.disabled);
+
+
 ///////////////////Pour envoie au serveur
 
 ////le sessionstorage équivaut au panier enregistré
@@ -395,9 +372,9 @@ formulaire.addEventListener("submit", function (event) {
     .then(function (data) {
       
       //id de commande dans le localstorage
-      localStorage.setItem('responseId', JSON.stringify(Object.values(data)[2]));
+      sessionStorage.setItem('responseId', JSON.stringify(Object.values(data)[2]));
       //total commandé dans le localStorage
-      localStorage.setItem('totalCommande', JSON.stringify(totalPanier.innerHTML));
+      sessionStorage.setItem('totalCommande', JSON.stringify(totalPanier.innerHTML));
 
       console.log(
         JSON.stringify(data),
@@ -420,16 +397,17 @@ formulaire.addEventListener("submit", function (event) {
 
       document.location.href = "confirmation.html";
 
-      // // si panier vide => VALIDATION formulaire pas possible
-      // // let envoieFormulaire = document.getElementById('envoie-formulaire');//console.log(envoieFormulaire.disabled);
-      // envoieFormulaire.addEventListener("click", function () {
-      //   envoieFormulaire.disabled = true;
 
-      //   //rechargement page
-      //   window.location.href = "panier.html";
-
-      //   //suppression sessionstorage après confirmation de la commande
-      //   sessionStorage.clear();
-      // });
+      //je supprime mon tableau
+      function removePanier() {
+          for(i = 0; i < sessionStorage.length; i++){
+      //longueur des key dont id => meubles === 24
+            if(key.length === 24){
+              sessionStorage.removeItem(key);
+            };
+          };
+        };
+            
+      removePanier();    
     });
 });
