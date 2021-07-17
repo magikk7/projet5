@@ -121,7 +121,8 @@ const page = my_url.get("name");//methode GET pour URL//recup valeur
         }, false);      
             
         } else if (this.readyState == 4 && this.status == 404) {
-            alert('Erreur 404 : Une erreur s\'est produite. La page est introuvable.');
+            window.location.href = "redirection404.html";
+            // alert('Erreur 404 : Une erreur s\'est produite. La page est introuvable.');
         };
     };
 
