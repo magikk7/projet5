@@ -76,6 +76,9 @@ if (sessionStorage == null || sessionStorage == 0) {
         sessionStorage.clear();
 
         totalPanier.innerHTML = `0 &euro;`;
+
+          //rechargement page
+        location.reload();
       });
     }
   }
@@ -170,17 +173,13 @@ function directionFormulaire() {
     newButton.innerText = "Valider le panier en complétant le formulaire";
     newButton.style.visibility = "visible";
 
-    // let image = document.createElement("img");
-    // image.setAttribute('src', 'img/chevron-direction-bas.png');
-    // image.setAttribute('class', 'chevron');
     divAllerAuFormulaire.appendChild(newButton);
-    // newButton.appendChild(image);
 
     let supprimerPanier = document.getElementById("supprimer-panier");
-    supprimerPanier.style.visibility="visible"; //"visible"
+    supprimerPanier.style.visibility="visible";
 
     let partieFormulaire = document.getElementById("partie-formulaire");
-    partieFormulaire.style.visibility="visible"; //"visible"
+    partieFormulaire.style.visibility="visible"; 
   }else{
     // aller page accueil
     let divAllerAuFormulaire = document.getElementById("direction-form");
@@ -194,7 +193,7 @@ function directionFormulaire() {
     //ahref
     let lienAccueil = document.createElement("a");
     lienAccueil.setAttribute('href', 'index.html');
-    lienAccueil.innerText = "Accueil";
+    lienAccueil.innerHTML = "&lsaquo; Retour Accueil";
 
     accueilButton.appendChild(lienAccueil);
     divAllerAuFormulaire.appendChild(accueilButton);    
@@ -202,7 +201,7 @@ function directionFormulaire() {
 };
 
 
-/////////////////////////formulaire a envoyer au serveur//////////////////////////////////
+/////////////////////////PARTIE FORMULAIRE a envoyer au serveur//////////////////////////////////
 let formulaire = document.getElementById("formulaire"); // console.log(formulaire);
 let totalPanier = document.getElementById("prix-tout-total"); // console.log(totalPanier);
 let sommePanier = parseInt(totalPanier.innerHTML); // console.log(sommePanier);
@@ -239,7 +238,7 @@ let lastNameRegex = new RegExp("^[a-zA-Z][A-Za-zéèê-]{1,30}$");
     // console.log(parseInt(testLastName));
   } else {
     refus.innerHTML =
-      "Nom de famille non valide. N'insérez pas de chiffres.";
+      "Nom de famille non valide. Minuscules et majuscules acceptées. N'insérez pas de chiffres, ni de caractères spéciaux.";
     //effacer le champ si saisie de chiffre
     //console.log(inputLastName.value);
       inputLastName.value = "";
@@ -261,7 +260,7 @@ const validFirstName = function (inputFirstName) {
     refus.innerHTML = "Prénom valide";
   } else {
     refus.innerHTML =
-      "Prénom non valide. N'insérez pas de chiffres.";
+      "Prénom non valide. Minuscules et majuscules acceptées. N'insérez pas de chiffres, ni de caractères spéciaux.";
     //effacer le champ si saisie de chiffre
     //console.log(inputFirstName.value);
     inputFirstName.value = "";
@@ -279,11 +278,12 @@ const validCity = function (inputCity) {
   let testCity = cityRegex.test(inputCity.value);
   let refus = inputCity.nextElementSibling;
   // console.log(testCity);
-  if (testCity || typeof testCity == false) {
+  if (testCity || typeof testCity == false || parseInt(testCity) == NaN) {
+  // if (testCity || typeof testCity == false) {
     refus.innerHTML = "Ville valide";
   } else {
     refus.innerHTML =
-      "Ville non valide.";
+      "Ville non valide. Minuscules et majuscules acceptées. N'insérez pas de chiffres, ni de caractères spéciaux.";
        //effacer le champ si saisie de chiffre
     inputCity.value = "";
   };
@@ -295,7 +295,7 @@ formulaire.address.addEventListener("change", function () {
 });
 
 const validAddress = function (inputAddress) {
-  let addressRegex = new RegExp("^([0-9a-zA-Z,. ]*)$");
+  let addressRegex = new RegExp("^([0-9a-zA-Z,. ]*){1,30}$");
 
   let testAddress = addressRegex.test(inputAddress.value);
   let refus = inputAddress.nextElementSibling;
@@ -303,7 +303,7 @@ const validAddress = function (inputAddress) {
   if (testAddress) {
     refus.innerHTML = "Addresse valide";
   } else {
-    refus.innerHTML = "Addresse non valide";
+    refus.innerHTML = "Addresse non valide. Minuscules et majuscules acceptées.";
     //effacer le champ si mauvaise saisie addresse
     inputAddress.value = "";
   };
@@ -323,7 +323,7 @@ const validCodePostal = function (inputCodePostal) {
   if (testCodePostal) {
     refus.innerHTML = "Code Postal valide";
   } else {
-    refus.innerHTML = "Code Postal non valide. Veuillez mettre des chiffres.";
+    refus.innerHTML = "Code-postal non valide. Veuillez mettre un code-postal à 5 chiffres.";
     //effacer le champ si saisie de lettres
     inputCodePostal.value = "";
   };
@@ -346,7 +346,7 @@ const validEmail = function (inputEmail) {
   if (testEmail) {
     refus.innerHTML = "Addresse Email valide";
   } else {
-    refus.innerHTML = "Addresse Email non valide.";
+    refus.innerHTML = "Addresse Email non valide. 'Ex: martin.dupont@gmail.fr'";
     //effacer le champ si mauvaise saisie
     inputEmail.value = "";
   };

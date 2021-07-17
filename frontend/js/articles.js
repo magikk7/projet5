@@ -122,7 +122,6 @@ const page = my_url.get("name");//methode GET pour URL//recup valeur
             
         } else if (this.readyState == 4 && this.status == 404) {
             window.location.href = "redirection404.html";
-            // alert('Erreur 404 : Une erreur s\'est produite. La page est introuvable.');
         };
     };
 
