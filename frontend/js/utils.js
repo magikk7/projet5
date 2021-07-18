@@ -14,28 +14,3 @@
             }
             return c;
         };
-
-//fichier panier.js        
-//fonction supprimer dans le tableau panier 
-    let supprimerPanier = document.getElementById("supprimer-panier"); //console.log(supprimerPanier);
-    let leParentPourTableau = document.getElementById("tbody-panier"); // console.log(leParentPourTableau);//ok
-
-    function toutSupprimer() {
-        if (sessionStorage.length > 0) {
-            supprimerPanier.addEventListener("click", function (event) {
-            //console.log(event);
-            event.preventDefault;
-    
-            //je selectionne tout le tableau à supprimer
-            leParentPourTableau.remove();
-    
-            //suppression du sesionstorage
-            sessionStorage.clear();
-    
-            totalPanier.innerHTML = `0 &euro;`;
-    
-              //rechargement page
-            location.reload();
-            });
-        };
-    };        

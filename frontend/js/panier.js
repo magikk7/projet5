@@ -4,145 +4,169 @@ let infoQuantiteTableau = parseInt(
 ); //pour panier vide
 let tbodyPanier = document.getElementById("tbody-panier");
 
-if (sessionStorage == null || sessionStorage == 0) {
-  infoQuantiteTableau.innerHTML = "Votre panier est vide";
-} else {
-  for (i = 0; i < sessionStorage.length; i++) {
-    var key = sessionStorage.key(i); //console.log(key);
-    var selectionMeublePanier = JSON.parse(sessionStorage.getItem(key)); //console.log(selectionMeublePanier);
-
-    if(key.length === 24 && key.length !== 36) {
-      //partie HTML - visible sur le site avec la boucle for - informations et quantités repris du sessionstorage en cours
-    tbodyPanier.innerHTML += `
-    <tr class="ligne-produit" id="${key}">
-        <td class="donnees-tableau center">${
-          selectionMeublePanier[0].name
-        }</td>
-        <td class="donnees-tableau quantite-produit-select center"></td>
-        <td class="donnees-tableau prix-unique-produit right">${
-          selectionMeublePanier[0].price / 100
-        } &euro;</td>
-        
-        <td class="donnees-tableau sous-total-produit right"></td>
-        <td><button id="bouton" class="donnees-tableau btn-supprimer">Supprimer</button><td>
-    </tr>
-    `;
+  if (sessionStorage == null || sessionStorage == 0) {
+    infoQuantiteTableau.innerHTML = "Votre panier est vide";
+  } else {
+    for (i = 0; i < sessionStorage.length; i++) {
+      var key = sessionStorage.key(i); //console.log(key);
+      var selectionMeublePanier = JSON.parse(sessionStorage.getItem(key)); //console.log(selectionMeublePanier);
+  
+      if(key.length === 24 && key.length !== 36) {
+        //partie HTML - visible sur le site avec la boucle for - informations et quantités repris du sessionstorage en cours
+      tbodyPanier.innerHTML += `
+      <tr class="ligne-produit" id="${key}">
+          <td class="donnees-tableau center">${
+            selectionMeublePanier[0].name
+          }</td>
+          <td class="donnees-tableau quantite-produit-select center"></td>
+          <td class="donnees-tableau prix-unique-produit right">${
+            selectionMeublePanier[0].price / 100
+          } &euro;</td>
+          
+          <td class="donnees-tableau sous-total-produit right"></td>
+          <td><button id="bouton" class="donnees-tableau btn-supprimer">Supprimer</button><td>
+      </tr>
+      `;
+      };
     };
-  };
-
-  ////////////////////////////////////SUPPRIMER LIGNE DU PANIER////////////////////////////////////////////
-  let btnSupprimer = document.getElementsByClassName("btn-supprimer"); // console.log(btnSupprimer);
-  let totalPanier = document.getElementById("prix-tout-total"); // console.log(totalPanier);
-
-  function supprimer() {
-    if (sessionStorage.length > 0) {
-      for (i = 0; i < btnSupprimer.length; i++) {
-        btnSupprimer[i].addEventListener("click", function (event) {
-          // console.log(event);
-          event.preventDefault();
-
-          //la row des produits //5 rows maxi == 5 produits
-          event.target.parentElement.parentElement.remove();
-
-          //suppression dans le sessionstorage
-          sessionStorage.removeItem(key);
-
-          alert("produit(s) supprimé(s)");
-          //rechargement page
-          window.location.href = "panier.html";
-        });
-      }
-    } else {
-      alert("votre panier est vide");
-      totalPanier.innerHTML = `0 &euro;`;
-    }
-  }
-  supprimer();
-
-  ////////////////////// tout supprimer//////////cf fichier utils.js
-  toutSupprimer();
-
-  ///////////////////////recuperer VALEUR PAR LIGNE/////////////////
-
-  let parentPourTableau = document.getElementById("tbody-panier").children; // console.log(parentPourTableau);
-  // console.log(parentPourTableau);//ok
-
-  //PARENT
-  for (i = 0; i < parentPourTableau.length; i++) {
-    // console.log(parentPourTableau[i]);//LIGNE PRODUIT => TR
-
-    //ici je calcule chaque ligne
-    //ROW => PREND TOUS LES TD HORIZONTAUX
-    let enfant = parentPourTableau[i].children; //collection des TD HORIZONTAUX
-
-    //QUANTITE
-    let quantiteP = enfant[1];
-    // console.log(quantiteP);
-
-    if(key.length === 24) {
-      sessionStorage.key(i);
-    };
-    let stockage = JSON.parse(sessionStorage.getItem(key));
-    // console.log(stockage.length);
-
-    quantiteP.innerHTML = stockage.length;
-    let quantiteProduitParLigne = quantiteP.innerHTML;
-
-    //PRIX
-    let coutP = enfant[2]; //toute la balise TD PRIX
-    let chiffreCoutP = parseInt(coutP.innerHTML);
-    // console.log(chiffreCoutP);//number//
-
-    //SOUS TOTAL HORIZONTAL
-    let sousTotalP = enfant[3];
-    // console.log(sousTotalP);//TD SOUS TOTAL
-
-    function multiplication() {
-      return quantiteProduitParLigne * chiffreCoutP;
-    }
-    // console.log(multiplication());
-    sousTotalP.innerHTML = multiplication() + " &euro;";
-    // console.log(sousTotalP.innerHTML = multiplication() + ' &euro;')
-  }
-
-  ////////////////////////////////////TOTAL => CALCUL VERTICAL////////////////////////////////////////////
-
-  // let totalPanier = document.getElementById('prix-tout-total');
-  let ensembleSousTotal = document.getElementsByClassName("sous-total-produit");
-  // console.log(ensembleSousTotal);//string
-
-  function sommeDuPanier() {
-    let array = [];
-    let somme = 0;
-
-    for (i = 0; i < ensembleSousTotal.length; i++) {
-      if (ensembleSousTotal.length >= 1) {
-        let ensemble = parseInt(ensembleSousTotal[i].innerHTML);
-
-        //creation tableau pour addition des sous totaux
-        array.push(ensemble);
-
-        //addition
-        const reducer = (acc, cur) => acc + cur;
-
-        somme = array.reduce(reducer);
-        // console.log(somme);
-
-        //TOTAL du panier
-        totalPanier.innerHTML = `${somme} &euro;`;
+  
+    ////////////////////////////////////SUPPRIMER LIGNE DU PANIER////////////////////////////////////////////
+    let btnSupprimer = document.getElementsByClassName("btn-supprimer"); // console.log(btnSupprimer);
+    let totalPanier = document.getElementById("prix-tout-total"); // console.log(totalPanier);
+  
+    function supprimer() {
+      if (sessionStorage.length > 0) {
+        for (i = 0; i < btnSupprimer.length; i++) {
+          btnSupprimer[i].addEventListener("click", function (event) {
+            // console.log(event);
+            event.preventDefault();
+  
+            //la row des produits //5 rows maxi == 5 produits
+            event.target.parentElement.parentElement.remove();
+  
+            //suppression dans le sessionstorage
+            sessionStorage.removeItem(key);
+  
+            alert("produit(s) supprimé(s)");
+            //rechargement page
+            window.location.href = "panier.html";
+          });
+        }
       } else {
+        alert("votre panier est vide");
         totalPanier.innerHTML = `0 &euro;`;
       }
     }
-  }
-  sommeDuPanier();
-  directionFormulaire();
-}
+    supprimer();
+  
+    ////////////////////// tout supprimer//////
+    //fonction supprimer dans le tableau panier 
+    let supprimerPanier = document.getElementById("supprimer-panier"); //console.log(supprimerPanier);
+    let leParentPourTableau = document.getElementById("tbody-panier"); // console.log(leParentPourTableau);//ok
+  
+    function toutSupprimer() {
+        if (sessionStorage.length > 0) {
+            supprimerPanier.addEventListener("click", function (event) {
+            //console.log(event);
+            event.preventDefault;
+    
+            //je selectionne tout le tableau à supprimer
+            leParentPourTableau.remove();
+    
+            //suppression du sesionstorage
+            sessionStorage.clear();
+    
+            totalPanier.innerHTML = `0 &euro;`;
+    
+              //rechargement page
+            location.reload();
+            });
+        };
+    };   
+    toutSupprimer();
+  
+    ///////////////////////recuperer VALEUR PAR LIGNE/////////////////
+  
+    let parentPourTableau = document.getElementById("tbody-panier").children; // console.log(parentPourTableau);
+    // console.log(parentPourTableau);//ok
+  
+    //PARENT
+    for (i = 0; i < parentPourTableau.length; i++) {
+      // console.log(parentPourTableau[i]);//LIGNE PRODUIT => TR
+  
+      //ici je calcule chaque ligne
+      //ROW => PREND TOUS LES TD HORIZONTAUX
+      let enfant = parentPourTableau[i].children; //collection des TD HORIZONTAUX
+  
+      //QUANTITE
+      let quantiteP = enfant[1];
+      // console.log(quantiteP);
+  
+      if(key.length === 24) {
+        sessionStorage.key(i);
+      };
+      let stockage = JSON.parse(sessionStorage.getItem(key));
+      // console.log(stockage.length);
+  
+      quantiteP.innerHTML = stockage.length;
+      let quantiteProduitParLigne = quantiteP.innerHTML;
+  
+      //PRIX
+      let coutP = enfant[2]; //toute la balise TD PRIX
+      let chiffreCoutP = parseInt(coutP.innerHTML);
+      // console.log(chiffreCoutP);//number//
+  
+      //SOUS TOTAL HORIZONTAL
+      let sousTotalP = enfant[3];
+      // console.log(sousTotalP);//TD SOUS TOTAL
+  
+      function multiplication() {
+        return quantiteProduitParLigne * chiffreCoutP;
+      }
+      // console.log(multiplication());
+      sousTotalP.innerHTML = multiplication() + " &euro;";
+      // console.log(sousTotalP.innerHTML = multiplication() + ' &euro;')
+    };
+  
+    ////////////////////////////////////TOTAL => CALCUL VERTICAL////////////////////////////////////////////
+  
+    // let totalPanier = document.getElementById('prix-tout-total');
+    let ensembleSousTotal = document.getElementsByClassName("sous-total-produit");
+    // console.log(ensembleSousTotal);//string
+  
+    function sommeDuPanier() {
+      let array = [];
+      let somme = 0;
+  
+      for (i = 0; i < ensembleSousTotal.length; i++) {
+        if (ensembleSousTotal.length >= 1) {
+          let ensemble = parseInt(ensembleSousTotal[i].innerHTML);
+  
+          //creation tableau pour addition des sous totaux
+          array.push(ensemble);
+  
+          //addition
+          const reducer = (acc, cur) => acc + cur;
+  
+          somme = array.reduce(reducer);
+          // console.log(somme);
+  
+          //TOTAL du panier
+          totalPanier.innerHTML = `${somme} &euro;`;
+        } else {
+          totalPanier.innerHTML = `0 &euro;`;
+        };
+      };
+    };
+    sommeDuPanier();
+    directionFormulaire(1);//console.log(directionFormulaire);
+  };
+
 
 ////////////////////RAJOUTER DANS FICHIER DES FONCTIONS
 //function => axer le client vers le formulaire
-function directionFormulaire() {
-  if (sessionStorage.length >= 1) {
+function directionFormulaire(a) {
+  if (sessionStorage.length >= a) {
     // console.log(sessionStorage)
     let divAllerAuFormulaire = document.getElementById("direction-form");
 
@@ -292,7 +316,7 @@ const validCodePostal = function (inputCodePostal) {
 
   let testCodePostal = codePostalRegex.test(inputCodePostal.value);
   let refus = inputCodePostal.nextElementSibling;
-  // console.log(testAddress);
+  
   if (testCodePostal) {
     refus.innerHTML = "Code Postal valide";
   } else {
@@ -407,7 +431,6 @@ formulaire.addEventListener("submit", function (event) {
             };
           };
         };
-            
-      removePanier();    
+      removePanier();
     });
 });

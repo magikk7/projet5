@@ -21,7 +21,7 @@ main()
 
     
     function displayProduit(produit){
-        //pour function numStr()
+        //pour function numStr() => utils.js
         let prix = `${produit.price}`;// console.log(prix);
         let resultat = prix / 100;// console.log(resultat);
 

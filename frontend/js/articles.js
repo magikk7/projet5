@@ -64,18 +64,21 @@ const page = my_url.get("name");//methode GET pour URL//recup valeur
         </div>`
     ;
 
+
         // OPTION VERNIS => boucle do while - pour lister les choix d'options couleurs vernis
         let i = 0;
-
-        do {
-            // console.log(varnish[i]);
-            let options = document.createElement('option');
-            options.classList.add('class_option');
-            options.innerHTML = `<option value="${this.response.varnish[i]}">${this.response.varnish[i]}</option>`;
-            document.getElementById('meubles').appendChild(options);
-            i += 1;
-            } 
-        while (i < this.response.varnish.length);
+            
+            do {
+                // console.log(varnish[i]);
+                let options = document.createElement('option');
+                options.classList.add('class_option');
+                options.innerHTML = `<option value="${this.response.varnish[i]}">${this.response.varnish[i]}</option>`;
+                document.getElementById('meubles').appendChild(options);
+                i += 1;
+                } 
+            while (i < this.response.varnish.length);
+        
+        
 
 
 //Incrémenter PANIER dans nav + en sessionStorage / Aller au PANIER
