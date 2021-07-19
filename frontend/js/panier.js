@@ -217,6 +217,16 @@ let inputCity = document.getElementById("city");
 let inputEmail = document.getElementById("email");
 
 
+// si panier vide => VALIDATION formulaire pas possible
+let envoieFormulaire = document.getElementById("envoie-formulaire"); //console.log(envoieFormulaire.disabled);
+// console.log(typeof parseInt(totalPanier.innerHTML));
+// console.log(parseInt(totalPanier.innerHTML));
+let sommeTotalPanier = parseInt(totalPanier.innerHTML);
+if (sommeTotalPanier > 1) {
+  envoieFormulaire.disabled = false;
+};
+
+
 /////////////////////////////////valider tous les champs du formulaire avant envoie au server///////////////////
   ////valider lastname
 formulaire.lastName.addEventListener("change", function () {
@@ -270,7 +280,7 @@ formulaire.city.addEventListener("change", function () {
 });
 
 const validCity = function (inputCity) {
-  let cityRegex = new RegExp("^[a-zA-Z][A-Za-zéèê-]{1,30}$");
+  let cityRegex = new RegExp("^[a-zA-Z][A-Za-zéèê-]{1,45}$");
 
   let testCity = cityRegex.test(inputCity.value);
   let refus = inputCity.nextElementSibling;
@@ -292,7 +302,7 @@ formulaire.address.addEventListener("change", function () {
 });
 
 const validAddress = function (inputAddress) {
-  let addressRegex = new RegExp("^([0-9a-zA-Z,. ]*){1,30}$");
+  let addressRegex = new RegExp("^([0-9a-zA-Z,. ]*){1,50}$");
 
   let testAddress = addressRegex.test(inputAddress.value);
   let refus = inputAddress.nextElementSibling;
@@ -349,10 +359,7 @@ const validEmail = function (inputEmail) {
   };
 };
 
-// si panier vide => VALIDATION formulaire pas possible////////////////////////////question
-let envoieFormulaire = document.getElementById("envoie-formulaire"); //console.log(envoieFormulaire.disabled);
-
-
+// si panier vide => VALIDATION formulaire pas possible//
 ///////////////////Pour envoie au serveur
 
 ////le sessionstorage équivaut au panier enregistré
