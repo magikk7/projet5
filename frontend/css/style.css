@@ -29,12 +29,12 @@ html, body {
     border-radius: 10px;
 }
 
-.flexbox{
+.d-flex{
     display: flex;
 }
 
 .flex1 {
-    flex: 1;
+    flex: 1.5;
 }
 
 .flex2 {
@@ -110,6 +110,7 @@ h3 {
 
 .gallery {
     background-color: whitesmoke;
+    margin:0 auto;
 }
 
 .card {
@@ -343,8 +344,57 @@ footer {
     padding: 1rem;
 }
 
-@media (max-width: 800px) {
+@media (min-width: 360px) and (max-width: 780px){
+    html, body {
+        font-size: .85rem;
+    }
+
     .img-first {
         height: 200px;
+    }
+
+    .d-flex{
+        flex-direction: column;
+        padding: 25px;
+    }
+    .flex2 {
+        flex: 1;
+        padding-top: 40px;
+    }
+
+    .form-group {
+        margin: 0 70px;
+    }
+
+    .form-group:nth-child(1) {
+        margin-top: 20px;
+    }
+}
+
+
+@media (max-width: 360px){
+    html, body {
+        font-size: .80rem;
+    }
+
+    .img-first {
+        height: 150px;
+    }
+
+    .d-flex{
+        flex-direction: column;
+        padding: 10px;
+    }
+    .flex2 {
+        flex: 1;
+        padding-top: 20px;
+    }
+
+    .form-group {
+        margin: 0 5px;
+    }
+
+    .form-group:nth-child(1) {
+        margin-top: 10px;
     }
 }

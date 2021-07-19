@@ -40,7 +40,7 @@
 
 <!-- partie sous JS -->
 <main>
-    <div class="flexbox">
+    <div class="d-flex">
         <div class="container main-panier flex1" id="table-panier">    
             <div class="row gradient p-3 mx-1">
                 <div class="col">
@@ -67,7 +67,7 @@
                         <tbody id="tbody-total">
                             <tr>
                                 <td colspan="2" class="donnees-tableau center gras">TOTAL</td>
-                                <td colspan="3" class="donnees-tableau center gras" id="prix-tout-total">0 &euro;</td>
+                                <td colspan="3" class="donnees-tableau center gras" id="prix-tout-total">0 <span>&euro;</span></td>
                             </tr>         
                         </tbody>
                     </table>
@@ -95,13 +95,12 @@
             </div>
         </div>
         <!-- partie 2 -->
-        <div class="flex2">
-            <div class="container container-formulaire" id="partie-formulaire">
+            <div class="container container-formulaire flex2" id="partie-formulaire">
                 <div class="row gradient p-3 mx-1">
                 <!-- <div class="row"> -->
                     <div class="col">
                         <!-- partie du formulaire -->
-                        <h2 class="color-light">Formulaire de validation : </h2>
+                        <h2 class="color-light  titre-formulaire">Formulaire de validation : </h2>
                         </div>
                     </div>
 
@@ -149,13 +148,9 @@
                         </form>
                         </div>
                         </div>
-                    </div>
-                </div>
             </div>
-
-            <div id="confirmCommande"><!-- partie js --></div>
-        </div>
-    </div>    
+    </div>
+        <div id="confirmCommande"><!-- partie js --></div>
 </main>
 
 

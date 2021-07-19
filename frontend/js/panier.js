@@ -24,7 +24,7 @@ let tbodyPanier = document.getElementById("tbody-panier");
           } &euro;</td>
           
           <td class="donnees-tableau sous-total-produit right"></td>
-          <td><button id="bouton" class="donnees-tableau btn-supprimer">Supprimer</button><td>
+          <td><button id="bouton" class="donnees-tableau btn-supprimer btn btn-danger">Supprimer</button><td>
       </tr>
       `;
       };
