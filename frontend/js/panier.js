@@ -234,7 +234,7 @@ formulaire.lastName.addEventListener("change", function () {
 });
 
 const validLastName = function (inputLastName) {
-let lastNameRegex = new RegExp("^[a-zA-Z][A-Za-zéèê-]{1,30}$");
+let lastNameRegex = new RegExp("^[a-zA-Zéèê\\-\\s]{1,30}$");
 
   let testLastName = lastNameRegex.test(inputLastName.value);
   let refus = inputLastName.nextElementSibling;
@@ -258,7 +258,7 @@ formulaire.firstName.addEventListener("change", function () {
 });
 
 const validFirstName = function (inputFirstName) {
-  let firstNameRegex = new RegExp("^[a-zA-Z][A-Za-zéèê-]{1,30}$");
+  let firstNameRegex = new RegExp("^[a-zA-Zéèê\\-\\s]{1,30}$");
 
   let testFirstName = firstNameRegex.test(inputFirstName.value);
   let refus = inputFirstName.nextElementSibling;
@@ -280,7 +280,7 @@ formulaire.city.addEventListener("change", function () {
 });
 
 const validCity = function (inputCity) {
-  let cityRegex = new RegExp("^[a-zA-Z][A-Za-zéèê-]{1,45}$");
+  let cityRegex = new RegExp("^[a-zA-Zéèê\\-\\s]{1,30}$");
 
   let testCity = cityRegex.test(inputCity.value);
   let refus = inputCity.nextElementSibling;

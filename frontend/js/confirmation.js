@@ -11,4 +11,3 @@ let montantCommande = document.getElementById('montant-commande');// console.log
 //informations en dynamique dans les balises HTML
 numeroCommande.innerHTML = idCommande;
 montantCommande.innerHTML = panierCommande;  
-

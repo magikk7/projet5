@@ -64,7 +64,6 @@ const page = my_url.get("name");//methode GET pour URL//recup valeur
         </div>`
     ;
 
-
         // OPTION VERNIS => boucle do while - pour lister les choix d'options couleurs vernis
         let i = 0;
             
