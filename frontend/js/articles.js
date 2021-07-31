@@ -46,8 +46,9 @@ const page = my_url.get("name");//methode GET pour URL//recup valeur
                             <label for="meubles" class="label-article">Choisir une couleur de vernis :</label>
                             <select class="form-select" name="meubles" id="meubles"></select>
                         </div>
+
                         <button class="btn btn-success btn-validation increment-btn" id="bouton_validation" type="button">Ajouter au panier</button>
-                        <div>Quantité : <input type="text" class="counter" value="0"/></div>
+                        
                     </form>
                 </div>
                 <hr>
@@ -78,6 +79,16 @@ const page = my_url.get("name");//methode GET pour URL//recup valeur
             while (i < this.response.varnish.length);
         
         
+            //quantite 
+// let quantiteSelection = document.querySelector('.quantite-selection'); //console.log(quantiteSelection);
+// //nb entier et positif
+// quantiteSelection.addEventListener('input', () => {
+//     if(quantiteSelection.value >= 1 && quantiteSelection.value <= 150) {
+//         sessionStorage.setItem('qte', parseInt(quantiteSelection.value));
+//         // console.log(parseInt(quantiteSelection.value))
+//     }});
+
+
 
 
 //Incrémenter PANIER dans nav + en sessionStorage / Aller au PANIER
@@ -95,10 +106,7 @@ const page = my_url.get("name");//methode GET pour URL//recup valeur
             };
             // console.log(choixMeuble);
 
-///////////compteur au click == qui vaut quantite meuble
-            let counter = document.querySelector('.counter');
-            counter.value = parseInt(counter.value) + 1;
-            // counter.value = sessionStorage.length;
+
             
 
             let infoSessionStorage = JSON.parse(sessionStorage.getItem(choixMeuble._id));//valeur "dynamique" => représentée par ID

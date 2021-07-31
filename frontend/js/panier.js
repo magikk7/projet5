@@ -10,8 +10,9 @@ let tbodyPanier = document.getElementById("tbody-panier");
     for (i = 0; i < sessionStorage.length; i++) {
       var key = sessionStorage.key(i); //console.log(key);
       var selectionMeublePanier = JSON.parse(sessionStorage.getItem(key)); //console.log(selectionMeublePanier);
-  
-      if(key.length === 24 && key.length !== 36) {
+
+      // if(key.length === 24 && key.length !== 36) {
+      // if(key.length === 24) {
         //partie HTML - visible sur le site avec la boucle for - informations et quantités repris du sessionstorage en cours
       tbodyPanier.innerHTML += `
       <tr class="ligne-produit" id="${key}">
@@ -27,7 +28,7 @@ let tbodyPanier = document.getElementById("tbody-panier");
           <td><button id="bouton" class="donnees-tableau btn-supprimer btn btn-danger">Supprimer</button><td>
       </tr>
       `;
-      };
+      // };
     };
   
     ////////////////////////////////////SUPPRIMER LIGNE DU PANIER////////////////////////////////////////////
@@ -102,9 +103,9 @@ let tbodyPanier = document.getElementById("tbody-panier");
       let quantiteP = enfant[1];
       // console.log(quantiteP);
   
-      if(key.length === 24) {
-        sessionStorage.key(i);
-      };
+      // if(key.length === 24) {
+        // sessionStorage.key(i);
+      // };
       let stockage = JSON.parse(sessionStorage.getItem(key));
       // console.log(stockage.length);
   
@@ -118,6 +119,7 @@ let tbodyPanier = document.getElementById("tbody-panier");
   
       //SOUS TOTAL HORIZONTAL
       let sousTotalP = enfant[3];
+
       // console.log(sousTotalP);//TD SOUS TOTAL
   
       function multiplication() {
@@ -433,9 +435,9 @@ formulaire.addEventListener("submit", function (event) {
       function removePanier() {
           for(i = 0; i < sessionStorage.length; i++){
       //longueur des key dont id => meubles === 24
-            if(key.length === 24){
+            // if(key.length === 24){
               sessionStorage.removeItem(key);
-            };
+            // };
           };
         };
       removePanier();
